@@ -1,0 +1,6 @@
+@Route_2RC_HostAddress = http://localhost:5284
+
+GET {{Route_2RC_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
