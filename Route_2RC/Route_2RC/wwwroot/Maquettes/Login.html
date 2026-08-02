@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoualaRoads — Connexion</title>
+    <!-- Icônes FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Couleurs CUD : Vert profond, Bleu et Jaune/Or */
+            background: linear-gradient(135deg, #004d25 0%, #002244 60%, #e6a100 100%);
+            padding: 20px;
+        }
+
+        /* Carte de connexion principale */
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px 35px 35px 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border-top: 5px solid #008751;
+        }
+
+        /* Conteneur du logo sans espaces inutiles */
+        .logo-container {
+            margin: 0 0 10px 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .logo-container img {
+                height: 75px;
+                width: auto;
+                object-fit: contain;
+            }
+
+        /* Icône de secours si l'image n'est pas trouvée */
+        .logo-fallback {
+            width: 65px;
+            height: 65px;
+            background: #008751;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(0, 135, 81, 0.3);
+        }
+
+        .sub-title {
+            color: #008751;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        h1 {
+            color: #002244;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .description {
+            color: #555555;
+            font-size: 15px;
+            margin-bottom: 22px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+            .form-group label {
+                display: block;
+                font-size: 13px;
+                font-weight: 600;
+                color: #002244;
+                margin-bottom: 6px;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 13px 15px;
+                background-color: #f4f7f6;
+                border: 1px solid #dcdcdc;
+                border-radius: 10px;
+                font-size: 14px;
+                color: #333333;
+                outline: none;
+                transition: all 0.2s ease;
+            }
+
+                .form-group input:focus {
+                    border-color: #008751;
+                    background-color: #ffffff;
+                    box-shadow: 0 0 5px rgba(0, 135, 81, 0.3);
+                }
+
+            /* Avertissements d'erreur style Google */
+            .form-group.error input {
+                border-color: #d93025;
+                background-color: #fce8e6;
+            }
+
+        .error-message {
+            display: none;
+            color: #d93025;
+            font-size: 12px;
+            margin-top: 6px;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group.error .error-message {
+            display: flex;
+        }
+
+        .options-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555555;
+            cursor: pointer;
+        }
+
+            .remember-me input {
+                accent-color: #008751;
+                width: 16px;
+                height: 16px;
+            }
+
+        .forgot-pass {
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+            .forgot-pass:hover {
+                text-decoration: underline;
+            }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #008751 0%, #0056b3 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 135, 81, 0.3);
+        }
+
+            .btn-submit:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 6px 15px rgba(0, 135, 81, 0.4);
+            }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 22px 0;
+            color: #888888;
+            font-size: 12px;
+        }
+
+            .divider::before, .divider::after {
+                content: "";
+                flex: 1;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .divider span {
+                padding: 0 10px;
+            }
+
+        .signup-text {
+            font-size: 13px;
+            color: #666666;
+        }
+
+            .signup-text a {
+                color: #008751;
+                font-weight: 700;
+                text-decoration: none;
+            }
+
+                .signup-text a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <!-- Logo CUD avec bascule automatique si l'image est manquante -->
+        <div class="logo-container">
+            <img id="cudLogo" src="logo-cud.jpg" alt="Logo CUD" onerror="showFallbackIcon()" />
+            <div id="fallbackIcon" class="logo-fallback" style="display: none;">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+        </div>
+
+        <div class="sub-title">Communauté Urbaine de Douala</div>
+        <h1>Bon retour parmi nous</h1>
+        <p class="description">Connectez-vous</p>
+
+        <form id="loginForm" novalidate>
+            <div class="form-group" id="emailGroup">
+                <label for="email">Adresse e-mail</label>
+                <input type="email" id="email" placeholder="vous@exemple.com" />
+                <div class="error-message">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="emailErrorText">Saisissez une adresse e-mail valide</span>
+                </div>
+            </div>
+
+            <div class="form-group" id="passwordGroup">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" placeholder="••••••••" />
+                <div class="error-message">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="passwordErrorText">Saisissez un mot de passe</span>
+                </div>
+            </div>
+
+            <div class="options-row">
+                <label class="remember-me">
+                    <input type="checkbox" /> Se souvenir de moi
+                </label>
+                <a href="#" class="forgot-pass">Mot de passe oublié ?</a>
+            </div>
+
+            <button type="submit" class="btn-submit">SE CONNECTER</button>
+        </form>
+
+        <div class="divider">
+            <span>ou</span>
+        </div>
+
+        <div class="signup-text">
+            Pas encore de compte ? <a href="#">Créer un compte</a>
+        </div>
+    </div>
+
+    <script>
+        // Gestion du repli de l'image du logo
+        function showFallbackIcon() {
+            document.getElementById('cudLogo').style.display = 'none';
+            document.getElementById('fallbackIcon').style.display = 'flex';
+        }
+
+        // Script de validation des erreurs (style Google)
+        const form = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailGroup = document.getElementById('emailGroup');
+        const passwordGroup = document.getElementById('passwordGroup');
+        const emailErrorText = document.getElementById('emailErrorText');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            let isValid = true;
+
+            emailGroup.classList.remove('error');
+            passwordGroup.classList.remove('error');
+
+            const emailValue = emailInput.value.trim();
+            if (emailValue === '') {
+                emailErrorText.textContent = "Saisissez une adresse e-mail";
+                emailGroup.classList.add('error');
+                isValid = false;
+            } else if (!validateEmail(emailValue)) {
+                emailErrorText.textContent = "Saisissez un e-mail valide (ex: nom@domaine.com)";
+                emailGroup.classList.add('error');
+                isValid = false;
+            }
+
+            if (passwordInput.value.trim() === '') {
+                passwordGroup.classList.add('error');
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Connexion réussie !");
+            }
+        });
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+    </script>
+
+</body>
+</html>
