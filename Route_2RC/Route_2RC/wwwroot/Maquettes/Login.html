@@ -1,327 +1,431 @@
 ﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DoualaRoads — Connexion</title>
-    <!-- Icônes FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <title>AnRen — Connexion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --green-dark: #0f3d2e;
+            --green-mid: #3f7d3a;
+            --green-light: #7fae3f;
+            --yellow: #e8c93a;
+            --card-bg: #f2f0e9;
+            --card-bg-soft: #eceade;
+            --ink: #1c2b22;
+            --ink-soft: #5b6a5f;
+            --line: #d8d4c6;
+            --btn-blue: #1f5b74;
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
         }
 
         body {
-            min-height: 100vh;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: radial-gradient(1200px 800px at 10% -10%, rgba(255,255,255,0.06), transparent 60%), linear-gradient(160deg, var(--green-dark) 0%, var(--green-mid) 32%, var(--green-light) 55%, var(--yellow) 88%);
             display: flex;
-            justify-content: center;
-            align-items: center;
-            /* Couleurs CUD : Vert profond, Bleu et Jaune/Or */
-            background: linear-gradient(135deg, #004d25 0%, #002244 60%, #e6a100 100%);
-            padding: 20px;
+            flex-direction: column;
         }
 
-        /* Carte de connexion principale */
-        .login-card {
-            width: 100%;
-            max-width: 420px;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 30px 35px 35px 35px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            border-top: 5px solid #008751;
+        /* ---------- Watermark emblem ---------- */
+        .watermark {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(760px, 90vw);
+            opacity: 0.16;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* Conteneur du logo sans espaces inutiles */
-        .logo-container {
-            margin: 0 0 10px 0;
-            padding: 0;
+        /* ---------- Header ---------- */
+        header {
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
             display: flex;
-            justify-content: center;
             align-items: center;
+            gap: 22px;
+            padding: 22px 48px 0 48px;
         }
 
-            .logo-container img {
-                height: 75px;
-                width: auto;
+        .logo-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+            .logo-badge img {
+                width: 100%;
+                height: 100%;
                 object-fit: contain;
             }
 
-        /* Icône de secours si l'image n'est pas trouvée */
-        .logo-fallback {
-            width: 65px;
-            height: 65px;
-            background: #008751;
-            color: #ffffff;
-            border-radius: 50%;
+        .org-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #fff;
+            letter-spacing: 0.2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        }
+
+        .org-sub {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.85);
+            margin-top: 2px;
+        }
+
+        /* ---------- Main / Card ---------- */
+        main {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            font-size: 28px;
-            box-shadow: 0 4px 10px rgba(0, 135, 81, 0.3);
+            justify-content: center;
+            padding: 24px 20px 24px 20px;
         }
 
-        .sub-title {
-            color: #008751;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-
-        h1 {
-            color: #002244;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .description {
-            color: #555555;
-            font-size: 15px;
+        .brand {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
             margin-bottom: 22px;
         }
 
-        .form-group {
-            text-align: left;
-            margin-bottom: 18px;
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 2.4rem;
+            color: #fff;
+            letter-spacing: 0.5px;
+            text-shadow: 0 3px 14px rgba(0,0,0,0.3);
         }
 
-            .form-group label {
-                display: block;
-                font-size: 13px;
-                font-weight: 600;
-                color: #002244;
-                margin-bottom: 6px;
+            .brand-name span {
+                color: var(--yellow);
             }
 
-            .form-group input {
-                width: 100%;
-                padding: 13px 15px;
-                background-color: #f4f7f6;
-                border: 1px solid #dcdcdc;
-                border-radius: 10px;
-                font-size: 14px;
-                color: #333333;
-                outline: none;
-                transition: all 0.2s ease;
+        .card {
+            width: 100%;
+            max-width: 440px;
+            background: linear-gradient(180deg, var(--card-bg) 0%, var(--card-bg-soft) 100%);
+            border-radius: 22px;
+            padding: 44px 40px 36px 40px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+            backdrop-filter: blur(2px);
+        }
+
+            .card h1 {
+                font-family: 'Playfair Display', serif;
+                font-weight: 700;
+                font-size: 1.9rem;
+                text-align: center;
+                color: var(--ink);
+                margin-bottom: 8px;
             }
 
-                .form-group input:focus {
-                    border-color: #008751;
-                    background-color: #ffffff;
-                    box-shadow: 0 0 5px rgba(0, 135, 81, 0.3);
-                }
-
-            /* Avertissements d'erreur style Google */
-            .form-group.error input {
-                border-color: #d93025;
-                background-color: #fce8e6;
+            .card p.subtitle {
+                text-align: center;
+                color: var(--ink-soft);
+                font-size: 0.97rem;
+                margin-bottom: 30px;
             }
 
-        .error-message {
-            display: none;
-            color: #d93025;
-            font-size: 12px;
-            margin-top: 6px;
-            align-items: center;
-            gap: 6px;
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+            margin-top: 20px;
         }
 
-        .form-group.error .error-message {
-            display: flex;
+            label:first-of-type {
+                margin-top: 0;
+            }
+
+        .input-wrap {
+            position: relative;
         }
 
-        .options-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            margin-bottom: 25px;
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--ink);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #555555;
+        input::placeholder {
+            color: #a9a89c;
+        }
+
+        #password {
+            padding-right: 44px;
+        }
+
+        .toggle-eye {
+            position: absolute;
+            top: 50%;
+            right: 14px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            padding: 4px;
+            margin: 0;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-soft);
         }
 
-            .remember-me input {
-                accent-color: #008751;
+            .toggle-eye:hover {
+                color: var(--ink);
+            }
+
+            .toggle-eye svg {
+                width: 20px;
+                height: 20px;
+                display: block;
+            }
+
+            .toggle-eye .eye-off {
+                display: none;
+            }
+
+            .toggle-eye.is-visible .eye-on {
+                display: none;
+            }
+
+            .toggle-eye.is-visible .eye-off {
+                display: block;
+            }
+
+        input:focus {
+            border-color: var(--btn-blue);
+            box-shadow: 0 0 0 3px rgba(31,91,116,0.15);
+        }
+
+        .row-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 22px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+
+            .remember input {
                 width: 16px;
                 height: 16px;
+                accent-color: var(--btn-blue);
             }
 
-        .forgot-pass {
-            color: #0056b3;
+        .forgot {
+            font-size: 0.9rem;
+            color: var(--btn-blue);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
         }
 
-            .forgot-pass:hover {
+            .forgot:hover {
                 text-decoration: underline;
             }
 
-        .btn-submit {
+        button.submit {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(90deg, #008751 0%, #0056b3 100%);
-            color: #ffffff;
+            margin-top: 26px;
+            padding: 15px;
             border: none;
-            border-radius: 10px;
-            font-size: 15px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, var(--green-mid) 0%, var(--btn-blue) 100%);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
             font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.6px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 12px rgba(0, 135, 81, 0.3);
+            box-shadow: 0 10px 22px rgba(31,91,116,0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
 
-            .btn-submit:hover {
+            button.submit:hover {
                 transform: translateY(-1px);
-                box-shadow: 0 6px 15px rgba(0, 135, 81, 0.4);
+                box-shadow: 0 14px 26px rgba(31,91,116,0.42);
             }
 
         .divider {
             display: flex;
             align-items: center;
-            margin: 22px 0;
-            color: #888888;
-            font-size: 12px;
+            gap: 14px;
+            margin: 26px 0 20px 0;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
         }
 
-            .divider::before, .divider::after {
+            .divider::before,
+            .divider::after {
                 content: "";
                 flex: 1;
-                border-bottom: 1px solid #e0e0e0;
+                height: 1px;
+                background: var(--line);
             }
 
-            .divider span {
-                padding: 0 10px;
-            }
-
-        .signup-text {
-            font-size: 13px;
-            color: #666666;
+        .signup {
+            text-align: center;
+            font-size: 0.92rem;
+            color: var(--ink);
         }
 
-            .signup-text a {
-                color: #008751;
-                font-weight: 700;
+            .signup a {
+                color: var(--btn-blue);
+                font-weight: 600;
                 text-decoration: none;
             }
 
-                .signup-text a:hover {
+                .signup a:hover {
                     text-decoration: underline;
                 }
+
+        @media (max-width:520px) {
+            header {
+                padding: 26px 22px 0 22px;
+            }
+
+            .org-name {
+                font-size: 1.15rem;
+            }
+
+            .card {
+                padding: 34px 24px 28px 24px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="login-card">
-        <!-- Logo CUD avec bascule automatique si l'image est manquante -->
-        <div class="logo-container">
-            <img id="cudLogo" src="logo-cud.jpg" alt="Logo CUD" onerror="showFallbackIcon()" />
-            <div id="fallbackIcon" class="logo-fallback" style="display: none;">
-                <i class="fa-solid fa-building-columns"></i>
-            </div>
+    <!-- Emblème filigrane en arrière-plan -->
+    <svg class="watermark" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#ffffff" stroke-width="4" fill="none" opacity="0.9">
+            <path d="M40 260 L300 60 L560 260" />
+            <path d="M100 260 L300 110 L500 260" />
+            <path d="M300 60 L300 260" />
+            <path d="M40 260 L560 260" stroke-width="6" />
+            <path d="M170 260 L170 400 Q170 440 300 440 Q430 440 430 400 L430 260" stroke-width="4" />
+            <circle cx="300" cy="250" r="230" stroke-width="2" opacity="0.5" />
+        </g>
+    </svg>
+
+    <header>
+        <div class="logo-badge">
+            <img src="cud-logo.png" alt="Logo Communauté Urbaine de Douala">
+        </div>
+        <div>
+            <div class="org-name">Communauté Urbaine de Douala</div>
+            <div class="org-sub">Régie des Routes et de la Construction</div>
+        </div>
+    </header>
+
+    <main>
+        <div class="brand">
+            <span class="brand-name">An<span>Ren</span></span>
         </div>
 
-        <div class="sub-title">Communauté Urbaine de Douala</div>
-        <h1>Bon retour parmi nous</h1>
-        <p class="description">Connectez-vous</p>
+        <form class="card" autocomplete="off">
+            <h1>Espace de connexion</h1>
+            <p class="subtitle">Accédez à votre compte ou administrateur.</p>
 
-        <form id="loginForm" novalidate>
-            <div class="form-group" id="emailGroup">
-                <label for="email">Adresse e-mail</label>
-                <input type="email" id="email" placeholder="vous@exemple.com" />
-                <div class="error-message">
-                    <i class="fa-solid fa-circle-exclamation"></i>
-                    <span id="emailErrorText">Saisissez une adresse e-mail valide</span>
-                </div>
+            <label for="email">Adresse e-mail</label>
+            <div class="input-wrap">
+                <input type="email" id="email" placeholder="vous@cud.cm">
             </div>
 
-            <div class="form-group" id="passwordGroup">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" placeholder="••••••••" />
-                <div class="error-message">
-                    <i class="fa-solid fa-circle-exclamation"></i>
-                    <span id="passwordErrorText">Saisissez un mot de passe</span>
-                </div>
+            <label for="password">Mot de passe</label>
+            <div class="input-wrap">
+                <input type="password" id="password" placeholder="••••••••">
+                <button type="button" class="toggle-eye" id="togglePassword" aria-label="Afficher le mot de passe" aria-pressed="false">
+                    <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-7-11-7a20.3 20.3 0 0 1 4.6-5.6M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 7 11 7a20.3 20.3 0 0 1-2.6 3.66M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+                        <path d="M1 1l22 22" />
+                    </svg>
+                </button>
             </div>
 
-            <div class="options-row">
-                <label class="remember-me">
-                    <input type="checkbox" /> Se souvenir de moi
+            <div class="row-between">
+                <label class="remember" for="remember" style="margin:0;">
+                    <input type="checkbox" id="remember">
+                    Se souvenir de moi
                 </label>
-                <a href="#" class="forgot-pass">Mot de passe oublié ?</a>
+                <a class="forgot" href="#">Mot de passe oublié ?</a>
             </div>
 
-            <button type="submit" class="btn-submit">SE CONNECTER</button>
+            <button class="submit" type="submit">SE CONNECTER</button>
+
+            <div class="divider">ou</div>
+
+            <div class="signup">
+                Pas encore de compte ? <a href="#">Créer un compte</a>
+            </div>
         </form>
-
-        <div class="divider">
-            <span>ou</span>
-        </div>
-
-        <div class="signup-text">
-            Pas encore de compte ? <a href="#">Créer un compte</a>
-        </div>
-    </div>
+    </main>
 
     <script>
-        // Gestion du repli de l'image du logo
-        function showFallbackIcon() {
-            document.getElementById('cudLogo').style.display = 'none';
-            document.getElementById('fallbackIcon').style.display = 'flex';
-        }
-
-        // Script de validation des erreurs (style Google)
-        const form = document.getElementById('loginForm');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const emailGroup = document.getElementById('emailGroup');
-        const passwordGroup = document.getElementById('passwordGroup');
-        const emailErrorText = document.getElementById('emailErrorText');
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            let isValid = true;
-
-            emailGroup.classList.remove('error');
-            passwordGroup.classList.remove('error');
-
-            const emailValue = emailInput.value.trim();
-            if (emailValue === '') {
-                emailErrorText.textContent = "Saisissez une adresse e-mail";
-                emailGroup.classList.add('error');
-                isValid = false;
-            } else if (!validateEmail(emailValue)) {
-                emailErrorText.textContent = "Saisissez un e-mail valide (ex: nom@domaine.com)";
-                emailGroup.classList.add('error');
-                isValid = false;
-            }
-
-            if (passwordInput.value.trim() === '') {
-                passwordGroup.classList.add('error');
-                isValid = false;
-            }
-
-            if (isValid) {
-                alert("Connexion réussie !");
-            }
+        var pwdInput = document.getElementById('password');
+        var toggleBtn = document.getElementById('togglePassword');
+        toggleBtn.addEventListener('click', function () {
+            var isVisible = pwdInput.type === 'text';
+            pwdInput.type = isVisible ? 'password' : 'text';
+            toggleBtn.classList.toggle('is-visible', !isVisible);
+            toggleBtn.setAttribute('aria-pressed', String(!isVisible));
+            toggleBtn.setAttribute('aria-label', isVisible ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
         });
-
-        function validateEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
     </script>
-
 </body>
 </html>
