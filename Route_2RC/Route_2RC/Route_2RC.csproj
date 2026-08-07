@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\Maquettes\dashboard.html" />
-    <None Include="wwwroot\Maquettes\Login.html" />
   </ItemGroup>
 
 </Project>
