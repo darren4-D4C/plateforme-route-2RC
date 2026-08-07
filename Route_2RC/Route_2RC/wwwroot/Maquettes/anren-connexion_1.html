@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnRen — Connexion</title>
+<style>
+  :root{
+    --green-900:#0E3A2C;
+    --green-700:#155040;
+    --green-600:#1B6350;
+    --gold-600:#B98A2E;
+    --gold-500:#C9A24A;
+    --cream:#FAF8F3;
+    --ink:#1C2621;
+    --ink-soft:#5B6660;
+    --line:#E4E1D6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Georgia","Times New Roman",serif;
+    background:var(--green-900);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .bg-motif{
+    position:absolute;
+    inset:0;
+    opacity:0.06;
+    pointer-events:none;
+  }
+  .topbar{
+    position:fixed;
+    top:0;left:0;right:0;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:18px 32px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    z-index:2;
+  }
+  .logo-badge{
+    width:42px;height:42px;
+    border-radius:50%;
+    background:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    border:1.5px solid rgba(255,255,255,0.25);
+    overflow:hidden;
+  }
+  .logo-badge svg{width:24px;height:24px;}
+  .logo-badge img{max-width:26px;max-height:26px;width:26px;height:26px;object-fit:contain;}
+  .topbar-text{color:var(--cream);line-height:1.25;}
+  .topbar-text .h1{font-size:16px;font-weight:600;letter-spacing:0.2px;}
+  .topbar-text .h2{font-size:12px;font-family:"Helvetica Neue",Arial,sans-serif;opacity:0.72;letter-spacing:0.3px;}
+
+  .card{
+    position:relative;
+    z-index:2;
+    background:var(--cream);
+    width:100%;
+    max-width:440px;
+    border-radius:6px;
+    padding:44px 40px 36px;
+    margin-top:64px;
+  }
+  .brand-mark{
+    text-align:center;
+    font-size:30px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    color:var(--green-900);
+    margin-bottom:26px;
+  }
+  .brand-mark span{color:var(--gold-600);}
+
+  h1.title{
+    font-size:22px;
+    font-weight:600;
+    color:var(--green-900);
+    margin-bottom:6px;
+  }
+  p.subtitle{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-bottom:28px;
+  }
+
+  label{
+    display:block;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:7px;
+    letter-spacing:0.2px;
+  }
+  .field{margin-bottom:18px;}
+  input[type="email"],input[type="password"]{
+    width:100%;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:14px;
+    padding:11px 13px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:#fff;
+    color:var(--ink);
+    outline:none;
+  }
+  input::placeholder{color:#A6A297;}
+  input:focus{border-color:var(--green-600);box-shadow:0 0 0 3px rgba(21,80,64,0.12);}
+
+  .pw-wrap{position:relative;}
+  .pw-wrap input{padding-right:40px;}
+  .pw-toggle{
+    position:absolute;right:11px;top:50%;transform:translateY(-50%);
+    background:none;border:none;cursor:pointer;color:var(--ink-soft);
+    display:none;align-items:center;
+  }
+  .pw-toggle.visible{display:flex;}
+
+  .row{
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:13px;
+    margin:4px 0 26px;
+  }
+  .remember{display:flex;align-items:center;gap:7px;color:var(--ink-soft);}
+  .remember input{width:14px;height:14px;accent-color:var(--green-700);}
+  .link{color:var(--green-700);text-decoration:none;font-weight:600;}
+  .link:hover{text-decoration:underline;}
+
+  button.submit{
+    width:100%;
+    background:var(--green-700);
+    color:var(--cream);
+    border:none;
+    padding:13px;
+    border-radius:5px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:0.4px;
+    cursor:pointer;
+  }
+  button.submit:hover{background:var(--green-600);}
+
+  .divider{
+    display:flex;align-items:center;gap:12px;
+    margin:24px 0 18px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12px;color:var(--ink-soft);
+  }
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line);}
+
+  .signup{
+    text-align:center;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<svg class="bg-motif" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="400" cy="400" r="280" fill="none" stroke="#FAF8F3" stroke-width="1"/>
+  <polygon points="400,180 620,600 180,600" fill="none" stroke="#FAF8F3" stroke-width="1" stroke-dasharray="6 6"/>
+</svg>
+
+<div class="topbar">
+  <div class="logo-badge">
+    <img src="C:\Users\User\Documents\projet_C_sharp\Stage\plateforme-route-2RC\Route_2RC\Route_2RC\wwwroot\Maquettes\cud-logo.png" alt="Logo CUD" style="width:26px;height:26px;object-fit:contain;display:block;">
+  </div>
+  <div class="topbar-text">
+    <div class="h1">Communauté Urbaine de Douala</div>
+    <div class="h2">Régie des Routes et de la Construction</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="brand-mark">An<span>Ren</span></div>
+  <h1 class="title">Espace de connexion</h1>
+  <p class="subtitle">Accédez à votre compte ou administrateur.</p>
+
+  <div class="field">
+    <label for="email">Adresse e-mail</label>
+    <input type="email" id="email" placeholder="vous@cud.cm">
+  </div>
+
+  <div class="field">
+    <label for="password">Mot de passe</label>
+    <div class="pw-wrap">
+      <input type="password" id="password" placeholder="••••••••" oninput="document.getElementById('pwToggle').classList.toggle('visible', this.value.length > 0)">
+      <button class="pw-toggle" id="pwToggle" type="button" aria-label="Afficher le mot de passe" onclick="
+        const pw = document.getElementById('password');
+        const eyeOpen = document.getElementById('eyeOpen');
+        const eyeClosed = document.getElementById('eyeClosed');
+        const showing = pw.type === 'text';
+        pw.type = showing ? 'password' : 'text';
+        eyeOpen.style.display = showing ? 'block' : 'none';
+        eyeClosed.style.display = showing ? 'none' : 'block';
+        this.setAttribute('aria-label', showing ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
+      ">
+        <svg id="eyeOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="display:block;"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        <svg id="eyeClosed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="display:none;"><path d="M3 3l18 18"/><path d="M10.6 10.6a3 3 0 0 0 4.24 4.24"/><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a17.6 17.6 0 0 1-3.09 4.09M6.1 6.1A17.5 17.5 0 0 0 1 11s4 7 11 7a10.9 10.9 0 0 0 4.9-1.14"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <label class="remember"><input type="checkbox"> Se souvenir de moi</label>
+    <a class="link" href="#">Mot de passe oublié ?</a>
+  </div>
+
+  <button class="submit">SE CONNECTER</button>
+
+  <div class="divider">ou</div>
+
+  <p class="signup">Pas encore de compte ? <a class="link" href="#">Créer un compte</a></p>
+</div>
+
+</body>
+</html>

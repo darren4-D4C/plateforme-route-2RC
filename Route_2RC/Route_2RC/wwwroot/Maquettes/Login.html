@@ -2,22 +2,19 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>AnRen — Connexion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>AnRen — Connexion</title>
     <style>
         :root {
-            --green-dark: #0f3d2e;
-            --green-mid: #3f7d3a;
-            --green-light: #7fae3f;
-            --yellow: #e8c93a;
-            --card-bg: #f2f0e9;
-            --card-bg-soft: #eceade;
-            --ink: #1c2b22;
-            --ink-soft: #5b6a5f;
-            --line: #d8d4c6;
-            --btn-blue: #1f5b74;
+            --green-900: #0E3A2C;
+            --green-700: #155040;
+            --green-600: #1B6350;
+            --gold-600: #B98A2E;
+            --gold-500: #C9A24A;
+            --cream: #FAF8F3;
+            --ink: #1C2621;
+            --ink-soft: #5B6660;
+            --line: #E4E1D6;
         }
 
         * {
@@ -26,288 +23,241 @@
             padding: 0;
         }
 
-        html, body {
-            height: 100%;
-            font-family: 'Inter', sans-serif;
-            color: var(--ink);
-        }
-
         body {
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-            background: radial-gradient(1200px 800px at 10% -10%, rgba(255,255,255,0.06), transparent 60%), linear-gradient(160deg, var(--green-dark) 0%, var(--green-mid) 32%, var(--green-light) 55%, var(--yellow) 88%);
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ---------- Watermark emblem ---------- */
-        .watermark {
-            position: absolute;
-            top: 8%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(760px, 90vw);
-            opacity: 0.16;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* ---------- Header ---------- */
-        header {
-            position: relative;
-            z-index: 2;
-            flex-shrink: 0;
+            font-family: "Georgia","Times New Roman",serif;
+            background: var(--green-900);
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            gap: 22px;
-            padding: 22px 48px 0 48px;
+            justify-content: center;
+            padding: 32px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-motif {
+            position: absolute;
+            inset: 0;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 32px;
+            font-family: "Helvetica Neue",Arial,sans-serif;
+            z-index: 2;
         }
 
         .logo-badge {
-            width: 64px;
-            height: 64px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            background: #fff;
+            background: var(--cream);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
             flex-shrink: 0;
+            border: 1.5px solid rgba(255,255,255,0.25);
             overflow: hidden;
         }
 
+            .logo-badge svg {
+                width: 24px;
+                height: 24px;
+            }
+
             .logo-badge img {
-                width: 100%;
-                height: 100%;
+                max-width: 26px;
+                max-height: 26px;
+                width: 26px;
+                height: 26px;
                 object-fit: contain;
             }
 
-        .org-name {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #fff;
-            letter-spacing: 0.2px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        .topbar-text {
+            color: var(--cream);
+            line-height: 1.25;
         }
 
-        .org-sub {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.85);
-            margin-top: 2px;
-        }
+            .topbar-text .h1 {
+                font-size: 16px;
+                font-weight: 600;
+                letter-spacing: 0.2px;
+            }
 
-        /* ---------- Main / Card ---------- */
-        main {
-            position: relative;
-            z-index: 2;
-            flex: 1;
-            min-height: 0;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 24px 20px 24px 20px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-            margin-bottom: 22px;
-        }
-
-        .brand-name {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: 2.4rem;
-            color: #fff;
-            letter-spacing: 0.5px;
-            text-shadow: 0 3px 14px rgba(0,0,0,0.3);
-        }
-
-            .brand-name span {
-                color: var(--yellow);
+            .topbar-text .h2 {
+                font-size: 12px;
+                font-family: "Helvetica Neue",Arial,sans-serif;
+                opacity: 0.72;
+                letter-spacing: 0.3px;
             }
 
         .card {
+            position: relative;
+            z-index: 2;
+            background: var(--cream);
             width: 100%;
             max-width: 440px;
-            background: linear-gradient(180deg, var(--card-bg) 0%, var(--card-bg-soft) 100%);
-            border-radius: 22px;
-            padding: 44px 40px 36px 40px;
-            box-shadow: 0 30px 70px rgba(0,0,0,0.35);
-            backdrop-filter: blur(2px);
+            border-radius: 6px;
+            padding: 44px 40px 36px;
+            margin-top: 64px;
         }
 
-            .card h1 {
-                font-family: 'Playfair Display', serif;
-                font-weight: 700;
-                font-size: 1.9rem;
-                text-align: center;
-                color: var(--ink);
-                margin-bottom: 8px;
+        .brand-mark {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--green-900);
+            margin-bottom: 26px;
+        }
+
+            .brand-mark span {
+                color: var(--gold-600);
             }
 
-            .card p.subtitle {
-                text-align: center;
-                color: var(--ink-soft);
-                font-size: 0.97rem;
-                margin-bottom: 30px;
-            }
+        h1.title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--green-900);
+            margin-bottom: 6px;
+        }
+
+        p.subtitle {
+            font-family: "Helvetica Neue",Arial,sans-serif;
+            font-size: 13.5px;
+            color: var(--ink-soft);
+            margin-bottom: 28px;
+        }
 
         label {
             display: block;
+            font-family: "Helvetica Neue",Arial,sans-serif;
+            font-size: 12.5px;
             font-weight: 600;
-            font-size: 0.9rem;
             color: var(--ink);
-            margin-bottom: 8px;
-            margin-top: 20px;
+            margin-bottom: 7px;
+            letter-spacing: 0.2px;
         }
 
-            label:first-of-type {
-                margin-top: 0;
-            }
-
-        .input-wrap {
-            position: relative;
+        .field {
+            margin-bottom: 18px;
         }
 
-        input[type="email"],
-        input[type="password"],
-        input[type="text"] {
+        input[type="email"], input[type="password"] {
             width: 100%;
-            padding: 14px 16px;
-            border-radius: 10px;
+            font-family: "Helvetica Neue",Arial,sans-serif;
+            font-size: 14px;
+            padding: 11px 13px;
             border: 1px solid var(--line);
+            border-radius: 5px;
             background: #fff;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
             color: var(--ink);
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         input::placeholder {
-            color: #a9a89c;
+            color: #A6A297;
         }
 
-        #password {
-            padding-right: 44px;
+        input:focus {
+            border-color: var(--green-600);
+            box-shadow: 0 0 0 3px rgba(21,80,64,0.12);
         }
 
-        .toggle-eye {
+        .pw-wrap {
+            position: relative;
+        }
+
+            .pw-wrap input {
+                padding-right: 40px;
+            }
+
+        .pw-toggle {
             position: absolute;
+            right: 11px;
             top: 50%;
-            right: 14px;
             transform: translateY(-50%);
             background: none;
             border: none;
-            padding: 4px;
-            margin: 0;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: var(--ink-soft);
-        }
-
-            .toggle-eye:hover {
-                color: var(--ink);
-            }
-
-            .toggle-eye svg {
-                width: 20px;
-                height: 20px;
-                display: block;
-            }
-
-            .toggle-eye .eye-off {
-                display: none;
-            }
-
-            .toggle-eye.is-visible .eye-on {
-                display: none;
-            }
-
-            .toggle-eye.is-visible .eye-off {
-                display: block;
-            }
-
-        input:focus {
-            border-color: var(--btn-blue);
-            box-shadow: 0 0 0 3px rgba(31,91,116,0.15);
-        }
-
-        .row-between {
-            display: flex;
+            display: none;
             align-items: center;
+        }
+
+            .pw-toggle.visible {
+                display: flex;
+            }
+
+        .row {
+            display: flex;
             justify-content: space-between;
-            margin-top: 22px;
+            align-items: center;
+            font-family: "Helvetica Neue",Arial,sans-serif;
+            font-size: 13px;
+            margin: 4px 0 26px;
         }
 
         .remember {
             display: flex;
             align-items: center;
-            gap: 9px;
-            font-size: 0.9rem;
-            color: var(--ink);
+            gap: 7px;
+            color: var(--ink-soft);
         }
 
             .remember input {
-                width: 16px;
-                height: 16px;
-                accent-color: var(--btn-blue);
+                width: 14px;
+                height: 14px;
+                accent-color: var(--green-700);
             }
 
-        .forgot {
-            font-size: 0.9rem;
-            color: var(--btn-blue);
+        .link {
+            color: var(--green-700);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-            .forgot:hover {
+            .link:hover {
                 text-decoration: underline;
             }
 
         button.submit {
             width: 100%;
-            margin-top: 26px;
-            padding: 15px;
+            background: var(--green-700);
+            color: var(--cream);
             border: none;
-            border-radius: 12px;
-            background: linear-gradient(90deg, var(--green-mid) 0%, var(--btn-blue) 100%);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
+            padding: 13px;
+            border-radius: 5px;
+            font-family: "Helvetica Neue",Arial,sans-serif;
+            font-size: 14px;
             font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 0.6px;
+            letter-spacing: 0.4px;
             cursor: pointer;
-            box-shadow: 0 10px 22px rgba(31,91,116,0.35);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
 
             button.submit:hover {
-                transform: translateY(-1px);
-                box-shadow: 0 14px 26px rgba(31,91,116,0.42);
+                background: var(--green-600);
             }
 
         .divider {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin: 26px 0 20px 0;
+            gap: 12px;
+            margin: 24px 0 18px;
+            font-family: "Helvetica Neue",Arial,sans-serif;
+            font-size: 12px;
             color: var(--ink-soft);
-            font-size: 0.85rem;
         }
 
-            .divider::before,
-            .divider::after {
+            .divider::before, .divider::after {
                 content: "";
                 flex: 1;
                 height: 1px;
@@ -316,116 +266,70 @@
 
         .signup {
             text-align: center;
-            font-size: 0.92rem;
-            color: var(--ink);
-        }
-
-            .signup a {
-                color: var(--btn-blue);
-                font-weight: 600;
-                text-decoration: none;
-            }
-
-                .signup a:hover {
-                    text-decoration: underline;
-                }
-
-        @media (max-width:520px) {
-            header {
-                padding: 26px 22px 0 22px;
-            }
-
-            .org-name {
-                font-size: 1.15rem;
-            }
-
-            .card {
-                padding: 34px 24px 28px 24px;
-            }
+            font-family: "Helvetica Neue",Arial,sans-serif;
+            font-size: 13px;
+            color: var(--ink-soft);
         }
     </style>
 </head>
 <body>
 
-    <!-- Emblème filigrane en arrière-plan -->
-    <svg class="watermark" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#ffffff" stroke-width="4" fill="none" opacity="0.9">
-            <path d="M40 260 L300 60 L560 260" />
-            <path d="M100 260 L300 110 L500 260" />
-            <path d="M300 60 L300 260" />
-            <path d="M40 260 L560 260" stroke-width="6" />
-            <path d="M170 260 L170 400 Q170 440 300 440 Q430 440 430 400 L430 260" stroke-width="4" />
-            <circle cx="300" cy="250" r="230" stroke-width="2" opacity="0.5" />
-        </g>
+    <svg class="bg-motif" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="400" cy="400" r="280" fill="none" stroke="#FAF8F3" stroke-width="1" />
+        <polygon points="400,180 620,600 180,600" fill="none" stroke="#FAF8F3" stroke-width="1" stroke-dasharray="6 6" />
     </svg>
 
-    <header>
+    <div class="topbar">
         <div class="logo-badge">
-            <img src="cud-logo.png" alt="Logo Communauté Urbaine de Douala">
+            <img src="C:/Users/User/Documents/projet_C_sharp/Stage/plateforme-route-2RC/Route_2RC/Route_2RC/wwwroot/Maquettes/cud-logo.png" alt="Logo CUD" style="width:26px;height:26px;object-fit:contain;display:block;">
         </div>
-        <div>
-            <div class="org-name">Communauté Urbaine de Douala</div>
-            <div class="org-sub">Régie des Routes et de la Construction</div>
+        <div class="topbar-text">
+            <div class="h1">Communauté Urbaine de Douala</div>
+            <div class="h2">Régie des Routes et de la Construction</div>
         </div>
-    </header>
+    </div>
 
-    <main>
-        <div class="brand">
-            <span class="brand-name">An<span>Ren</span></span>
-        </div>
+    <div class="card">
+        <div class="brand-mark">An<span>Ren</span></div>
+        <h1 class="title">Espace de connexion</h1>
+        <p class="subtitle">Accédez à votre compte ou administrateur.</p>
 
-        <form class="card" autocomplete="off">
-            <h1>Espace de connexion</h1>
-            <p class="subtitle">Accédez à votre compte ou administrateur.</p>
-
+        <div class="field">
             <label for="email">Adresse e-mail</label>
-            <div class="input-wrap">
-                <input type="email" id="email" placeholder="vous@cud.cm">
-            </div>
+            <input type="email" id="email" placeholder="vous@cud.cm">
+        </div>
 
+        <div class="field">
             <label for="password">Mot de passe</label>
-            <div class="input-wrap">
-                <input type="password" id="password" placeholder="••••••••">
-                <button type="button" class="toggle-eye" id="togglePassword" aria-label="Afficher le mot de passe" aria-pressed="false">
-                    <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z" />
-                        <circle cx="12" cy="12" r="3" />
-                    </svg>
-                    <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-7-11-7a20.3 20.3 0 0 1 4.6-5.6M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 7 11 7a20.3 20.3 0 0 1-2.6 3.66M14.12 14.12a3 3 0 1 1-4.24-4.24" />
-                        <path d="M1 1l22 22" />
-                    </svg>
+            <div class="pw-wrap">
+                <input type="password" id="password" placeholder="••••••••" oninput="document.getElementById('pwToggle').classList.toggle('visible', this.value.length > 0)">
+                <button class="pw-toggle" id="pwToggle" type="button" aria-label="Afficher le mot de passe" onclick="
+        const pw = document.getElementById('password');
+        const eyeOpen = document.getElementById('eyeOpen');
+        const eyeClosed = document.getElementById('eyeClosed');
+        const showing = pw.type === 'text';
+        pw.type = showing ? 'password' : 'text';
+        eyeOpen.style.display = showing ? 'block' : 'none';
+        eyeClosed.style.display = showing ? 'none' : 'block';
+        this.setAttribute('aria-label', showing ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
+      ">
+                    <svg id="eyeOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="display:block;"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>
+                    <svg id="eyeClosed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="display:none;"><path d="M3 3l18 18" /><path d="M10.6 10.6a3 3 0 0 0 4.24 4.24" /><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a17.6 17.6 0 0 1-3.09 4.09M6.1 6.1A17.5 17.5 0 0 0 1 11s4 7 11 7a10.9 10.9 0 0 0 4.9-1.14" /></svg>
                 </button>
             </div>
+        </div>
 
-            <div class="row-between">
-                <label class="remember" for="remember" style="margin:0;">
-                    <input type="checkbox" id="remember">
-                    Se souvenir de moi
-                </label>
-                <a class="forgot" href="#">Mot de passe oublié ?</a>
-            </div>
+        <div class="row">
+            <label class="remember"><input type="checkbox"> Se souvenir de moi</label>
+            <a class="link" href="#">Mot de passe oublié ?</a>
+        </div>
 
-            <button class="submit" type="submit">SE CONNECTER</button>
+        <button class="submit">SE CONNECTER</button>
 
-            <div class="divider">ou</div>
+        <div class="divider">ou</div>
 
-            <div class="signup">
-                Pas encore de compte ? <a href="#">Créer un compte</a>
-            </div>
-        </form>
-    </main>
+        <p class="signup">Pas encore de compte ? <a class="link" href="#">Créer un compte</a></p>
+    </div>
 
-    <script>
-        var pwdInput = document.getElementById('password');
-        var toggleBtn = document.getElementById('togglePassword');
-        toggleBtn.addEventListener('click', function () {
-            var isVisible = pwdInput.type === 'text';
-            pwdInput.type = isVisible ? 'password' : 'text';
-            toggleBtn.classList.toggle('is-visible', !isVisible);
-            toggleBtn.setAttribute('aria-pressed', String(!isVisible));
-            toggleBtn.setAttribute('aria-label', isVisible ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
-        });
-    </script>
 </body>
 </html>
