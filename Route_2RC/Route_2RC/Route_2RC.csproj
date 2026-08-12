@@ -6,9 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="wwwroot\Maquettes\Styles.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.10" />
@@ -16,10 +13,14 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\Maquettes\interventions\" />
+    <Folder Include="wwwroot\Maquettes\administration\" />
+    <Folder Include="wwwroot\Maquettes\signalements\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Maquettes\dashboard.html" />
+    <None Include="wwwroot\Maquettes\auth\Login.html" />
+    <None Include="wwwroot\Maquettes\dashboard\dashboard.html" />
   </ItemGroup>
 
 </Project>

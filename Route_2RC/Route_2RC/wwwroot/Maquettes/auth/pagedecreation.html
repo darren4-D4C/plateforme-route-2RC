@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnRen — Créer un compte</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="logo-badge">
+            <img src="../assets/cud-logo.png" alt="Logo CUD">
+        </div>
+        <div class="topbar-text">
+            <div class="h1">Communauté Urbaine de Douala</div>
+            <div class="h2">Régie des Routes et de la Construction</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <a href="pageaccueil.html" class="back-link">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+            Retour à l'accueil
+        </a>
+
+        <div class="brand-mark">An<span>Ren</span></div>
+        <h1 class="title">Créer un compte</h1>
+        <p class="subtitle">Remplissez les informations ci-dessous pour vous inscrire.</p>
+
+        <form id="registerForm" action="Login.html" method="GET" novalidate>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="nom" name="nom" placeholder="ex: Dupont" required>
+                    </div>
+                    <small class="error-msg">Le nom est requis.</small>
+                </div>
+                <div class="form-group">
+                    <label for="prenom">Prénom</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="prenom" name="prenom" placeholder="ex: Jean" required>
+                    </div>
+                    <small class="error-msg">Le prénom est requis.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <div class="input-wrapper">
+                    <input type="email" id="email" name="email" placeholder="j.dupont@cud.cm" required>
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                    </div>
+                </div>
+                <small class="error-msg">Veuillez entrer une adresse email valide.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Rôle / Fonction</label>
+                <div class="input-wrapper">
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>Sélectionnez un rôle</option>
+                        <option value="Citoyen">Citoyen / Riverain</option>
+                        <option value="Agent de terrain">Agent de terrain</option>
+                        <option value="Technicien">Technicien Voirie</option>
+                        <option value="Superviseur">Superviseur de chantier</option>
+                        <option value="Expert">Expert / Ingénieur GC</option>
+                        <option value="Admin">Administrateur Système</option>
+                    </select>
+                    <div class="input-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </div>
+                </div>
+                <small class="error-msg">Sélectionnez un rôle.</small>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="••••••••••••" required>
+                    </div>
+                    <small class="error-msg">Obligatoire.</small>
+                </div>
+                <div class="form-group" id="confirmGroup">
+                    <label for="confirm-password">Confirmation</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••••••" required>
+                    </div>
+                    <small class="error-msg" id="confirmErrorMsg">Obligatoire.</small>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Créer mon compte</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            let isValid = true;
+            const groups = this.querySelectorAll('.form-group');
+            const pass = document.getElementById('password').value;
+            const confirmInput = document.getElementById('confirm-password');
+            const confirmGroup = document.getElementById('confirmGroup');
+            const confirmErrorMsg = document.getElementById('confirmErrorMsg');
+
+            groups.forEach(group => {
+                const field = group.querySelector('input, select');
+                if (field && !field.value.trim()) {
+                    isValid = false;
+                    group.classList.add('has-error');
+                } else if (group !== confirmGroup) {
+                    group.classList.remove('has-error');
+                }
+
+                if (field) {
+                    field.addEventListener('input', () => {
+                        if (field.value.trim()) group.classList.remove('has-error');
+                    });
+                }
+            });
+
+            // Validation de la correspondance des mots de passe
+            if (pass && confirmInput.value) {
+                if (pass !== confirmInput.value) {
+                    isValid = false;
+                    confirmGroup.classList.add('has-error');
+                    confirmErrorMsg.textContent = "Les mots de passe ne correspondent pas.";
+                }
+            }
+
+            if (!isValid) e.preventDefault();
+        });
+    </script>
+
+</body>
+</html>

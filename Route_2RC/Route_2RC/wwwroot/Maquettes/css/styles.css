@@ -1,0 +1,406 @@
+﻿/* ==========================================================================
+   AnRen — Design System Unifié (Auth, Inscription & Accueil)
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: #FAF9F6;
+    color: #111111;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+    padding: 20px;
+    /* Motif géométrique discret Noir & Or */
+    background-image: radial-gradient(circle at 85% 20%, transparent 220px, rgba(176, 141, 43, 0.15) 221px, transparent 222px), radial-gradient(circle at 85% 20%, transparent 280px, rgba(17, 17, 17, 0.08) 281px, transparent 282px), radial-gradient(circle at 10% 85%, transparent 180px, rgba(176, 141, 43, 0.12) 181px, transparent 182px), linear-gradient(135deg, transparent 49.5%, rgba(17, 17, 17, 0.05) 50%, transparent 50.5%), linear-gradient(45deg, transparent 49.5%, rgba(176, 141, 43, 0.08) 50%, transparent 50.5%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 80px 80px, 120px 120px;
+}
+
+/* En-tête CUD */
+.topbar {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 10;
+}
+
+.logo-badge {
+    width: 42px;
+    height: 42px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+    .logo-badge img {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+    }
+
+.topbar-text .h1 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111111;
+}
+
+.topbar-text .h2 {
+    font-size: 11px;
+    color: #6B7280;
+}
+
+/* Carte Formulaire (Login / Création) */
+.card {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    border: 1px solid #B08D2B;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 460px;
+    padding: 36px 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+}
+
+/* Bouton Retour */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #B08D2B;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: color 0.2s ease;
+}
+
+    .back-link:hover {
+        color: #8C6F20;
+    }
+
+    .back-link svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 2.5;
+    }
+
+/* Identité visuelle AnRen */
+.brand-mark {
+    font-size: 28px;
+    font-weight: 900;
+    color: #111111;
+    text-align: center;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+}
+
+    .brand-mark span {
+        color: #B08D2B;
+    }
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: #111111;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #6B7280;
+    text-align: center;
+    margin-bottom: 26px;
+}
+
+/* Formulaires & Champs */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+    .form-group label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 6px;
+    }
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+    .input-wrapper input,
+    .input-wrapper select {
+        width: 100%;
+        height: 44px;
+        padding: 0 40px 0 14px;
+        border: 1px solid #D1D5DB;
+        border-radius: 8px;
+        font-size: 13.5px;
+        color: #111111;
+        background: #FAFAFA;
+        outline: none;
+        transition: all 0.2s ease;
+        appearance: none;
+    }
+
+        .input-wrapper input:focus,
+        .input-wrapper select:focus {
+            border-color: #B08D2B;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(176, 141, 43, 0.15);
+        }
+
+.input-icon {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    color: #9CA3AF;
+}
+
+    .input-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        fill: none;
+    }
+
+/* Boutons principaux */
+.btn-submit {
+    width: 100%;
+    height: 46px;
+    background: #111111;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
+    .btn-submit:hover {
+        background: #222222;
+    }
+
+/* ==========================================================================
+   Styles spécifiques à la Page d'Accueil (Landing)
+   ========================================================================== */
+
+.hero-container {
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+    padding: 40px 20px;
+}
+
+.hero-title {
+    font-size: 42px;
+    font-weight: 900;
+    color: #111111;
+    line-height: 1.15;
+    margin-bottom: 16px;
+}
+
+.hero-description {
+    font-size: 16px;
+    color: #4B5563;
+    max-width: 640px;
+    margin: 0 auto 32px auto;
+    line-height: 1.6;
+}
+
+.actions-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 28px;
+    background: #111111;
+    color: #FFFFFF;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+    .btn-primary:hover {
+        background: #222222;
+    }
+
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 28px;
+    background: #FFFFFF;
+    color: #111111;
+    border: 1px solid #B08D2B;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+    .btn-outline:hover {
+        background: #FAF9F6;
+        border-color: #8C6F20;
+    }
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    text-align: left;
+}
+
+.feature-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+    .feature-card h3 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #111111;
+        margin-bottom: 8px;
+    }
+
+    .feature-card p {
+        font-size: 13px;
+        color: #6B7280;
+        line-height: 1.5;
+    }
+
+/* ==========================================================================
+   Gestion des États d'Erreur (Rouge Subtil sur Fond Noir & Or)
+   ========================================================================== */
+
+/* État d'erreur natif (:invalid après interaction) ou via classe JS (.error) */
+.input-wrapper input:focus:invalid,
+.input-wrapper select:focus:invalid,
+.input-wrapper input.error,
+.input-wrapper select.error {
+    border-color: #DC2626 !important; /* Rouge discret et élégant */
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12) !important; /* Glow rouge très subtil */
+    background-color: #FEF2F2 !important; /* Très léger fond rosé pour contraste */
+}
+
+    /* Changement de couleur de l'icône en cas d'erreur */
+    .input-wrapper input:focus:invalid + .input-icon,
+    .input-wrapper select:focus:invalid + .input-icon,
+    .input-wrapper input.error + .input-icon,
+    .input-wrapper select.error + .input-icon {
+        color: #DC2626 !important;
+    }
+
+/* Libellé du champ qui passe au rouge si le champ parent est en erreur */
+.form-group:has(input:focus:invalid),
+.form-group:has(select:focus:invalid),
+.form-group.has-error label {
+    color: #B91C1C;
+}
+
+/* ==========================================================================
+   Arrière-plan Moderne & Visible (Noir & Or)
+   ========================================================================== */
+
+body {
+    background-color: #FAF8F5;
+    color: #111111;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+    padding: 20px;
+    /* Cercles géométriques et grilles bien dessinés et plus contrastés */
+    background-image: radial-gradient(circle at 90% 15%, transparent 200px, rgba(176, 141, 43, 0.28) 201px, transparent 203px), radial-gradient(circle at 90% 15%, transparent 320px, rgba(17, 17, 17, 0.15) 321px, transparent 323px), radial-gradient(circle at 10% 85%, transparent 220px, rgba(176, 141, 43, 0.25) 221px, transparent 223px), radial-gradient(circle at 10% 85%, transparent 380px, rgba(17, 17, 17, 0.12) 381px, transparent 383px), linear-gradient(135deg, transparent 49.5%, rgba(176, 141, 43, 0.1) 50%, transparent 50.5%), linear-gradient(45deg, transparent 49.5%, rgba(17, 17, 17, 0.08) 50%, transparent 50.5%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 60px 60px, 90px 90px;
+}
+
+/* ==========================================================================
+   Gestion des Erreurs et Messages Texte
+   ========================================================================== */
+
+.form-group {
+    margin-bottom: 18px;
+    position: relative;
+}
+
+/* Message sous le champ */
+.error-msg {
+    display: none;
+    font-size: 11px;
+    font-weight: 600;
+    color: #DC2626;
+    margin-top: 4px;
+    margin-left: 2px;
+}
+
+/* Quand le groupe a une erreur */
+.form-group.has-error .error-msg {
+    display: block;
+}
+
+.form-group.has-error label {
+    color: #DC2626;
+}
+
+.form-group.has-error .input-wrapper input,
+.form-group.has-error .input-wrapper select {
+    border-color: #DC2626 !important;
+    background-color: #FEF2F2 !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12) !important;
+}
+
+.form-group.has-error .input-icon {
+    color: #DC2626 !important;
+}
