@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détail du Signalement - Régie des routes et construction</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dash-page">
+
+    <nav class="dash-navbar">
+        <div class="dash-nav-brand">
+            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
+            <span>Régie des routes et construction</span>
+        </div>
+        <div class="dash-nav-links">
+            <div class="nav-user-profile">
+                <div class="user-avatar-badge">CE</div>
+                <div class="user-profile-info">
+                    <span class="user-profile-name">Chef Études & Contrôle</span>
+                    <span class="user-profile-role">Études & Contrôle</span>
+                </div>
+            </div>
+            <a href="../auth/pageaccueil.html">Accueil</a>
+            <a href="Liste.html" class="active">Signalements</a>
+            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-header">
+            <div>
+                <a href="Liste.html" class="section-subtitle-link">← Retour à la liste</a>
+                <h1 style="margin-top:0.5rem;">Signalement — Nid-de-poule</h1>
+                <p>Reçu le 12/08/2026 · <span id="statutLabel">Nouveau</span></p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="detail-grid">
+
+                <div class="detail-media">
+                    <div class="detail-photo-placeholder">
+                        📷 Photo transmise par le citoyen
+                    </div>
+                    <div class="detail-map-placeholder">
+                        <span>📍 Localisation</span>
+                        <span class="coords">4.051800, 9.767800</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="detail-info-list">
+                        <div class="detail-info-row">
+                            <span class="label">Type de dégradation</span>
+                            <span class="value">Nid-de-poule</span>
+                        </div>
+                        <div class="detail-info-row">
+                            <span class="label">Tronçon (à rattacher)</span>
+                            <span class="value">Non déterminé</span>
+                        </div>
+                        <div class="detail-info-row">
+                            <span class="label">Description</span>
+                            <span class="value">Grand nid-de-poule au milieu de la voie, dangereux la nuit.</span>
+                        </div>
+                        <div class="detail-info-row">
+                            <span class="label">Date de signalement</span>
+                            <span class="value">12/08/2026</span>
+                        </div>
+                        <div class="detail-info-row">
+                            <span class="label">Score de priorité</span>
+                            <span class="value">À calculer par le backend</span>
+                        </div>
+                    </div>
+
+                    <span class="report-section-label">Changer le statut</span>
+                    <div class="status-actions">
+                        <button type="button" class="btn-status is-current" id="btnNouveau" onclick="setStatus('nouveau', this)">Nouveau</button>
+                        <button type="button" class="btn-status" id="btnEnCours" onclick="setStatus('encours', this)">Marquer en cours</button>
+                        <button type="button" class="btn-status" id="btnTraite" onclick="setStatus('traite', this)">Marquer comme traité</button>
+                        <button type="button" class="btn-status status-reject" id="btnRejete" onclick="setStatus('rejete', this)">Rejeter</button>
+                    </div>
+
+                    <div style="margin-top: 1.8rem;">
+                        <a href="../interventions/Liste.html" class="btn-primary">Créer une intervention →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="detail.js"></script>
+</body>
+</html>

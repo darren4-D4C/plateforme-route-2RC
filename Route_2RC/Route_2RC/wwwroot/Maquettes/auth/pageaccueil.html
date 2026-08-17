@@ -3,49 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnRen — Accueil</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Accueil - AnRen</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body class="home-page">
 
-    <div class="topbar">
-        <div class="logo-badge">
+    <nav class="home-navbar">
+        <div class="home-nav-brand">
             <img src="../assets/cud-logo.png" alt="Logo CUD">
+            <span>Régie des routes et construction</span>
         </div>
-        <div class="topbar-text">
-            <div class="h1">Communauté Urbaine de Douala</div>
-            <div class="h2">Régie des Routes et de la Construction</div>
+        <div class="home-nav-links">
+            <a href="pageaccueil.html" class="active">Accueil</a>
+            <a href="../signalements/nouveau.html">Signaler un problème</a>
+            <a href="Login.html" class="btn-nav-login">Accédez à votre compte</a>
         </div>
-    </div>
+    </nav>
 
-    <div class="hero-container">
-        <div class="brand-mark" style="font-size: 36px; margin-bottom: 12px;">An<span>Ren</span></div>
-        <h1 class="hero-title">Gestion & Reconstruction du Réseau Routier</h1>
-        <p class="hero-description">
-            Plateforme centralisée de suivi, de diagnostic et de gestion des chantiers de voirie urbaine pour la Régie des Routes de Douala.
-        </p>
-
-        <div class="actions-group">
-            <a href="Login.html" class="btn-primary">Se connecter</a>
-            <a href="pagedecreation.html" class="btn-outline">Créer un compte</a>
+    <header class="home-hero">
+        <h1>Plateforme de Gestion & Reconstruction de la Voirie</h1>
+        <p>Régie des routes et construction - Communauté Urbaine de Douala</p>
+        <div class="home-hero-buttons">
+            <a href="../signalements/nouveau.html" class="btn-hero-signal">🚧 Signaler une dégradation</a>
+            <a href="Login.html" class="btn-hero-signal" style="background:transparent; color:var(--text-main); border-color:var(--text-muted);">🔒 Accédez à votre compte</a>
         </div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>Signalement & Diagnostics</h3>
-                <p>Relevé précis des dégradations routières et transmission directe aux équipes techniques.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Suivi des Chantiers</h3>
-                <p>Planification des interventions, gestion des ressources et contrôle de l'avancement des travaux.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Espace Collaboratif</h3>
-                <p>Accès adapté selon les rôles : Citoyens, Agents de terrain, Techniciens et Superviseurs.</p>
-            </div>
+    </header>
+
+    <div class="home-cards-container">
+        <div class="home-feature-card">
+            <div class="home-feature-icon">🚧</div>
+            <h3>Signalement Citoyen</h3>
+            <p>Déclarez rapidement les nids-de-poule, chaussées dégradées et drains obstrués.</p>
+        </div>
+        <div class="home-feature-card">
+            <div class="home-feature-icon">📊</div>
+            <h3>Moteur de Priorisation</h3>
+            <p>Analyse technique, suivi des coûts et planification optimisée par le service des Études.</p>
+        </div>
+        <div class="home-feature-card">
+            <div class="home-feature-icon">🚜</div>
+            <h3>Opérations & Logistique</h3>
+            <p>Suivi des chantiers en temps réel, affectation des engins et gestion du matériel.</p>
         </div>
     </div>
 

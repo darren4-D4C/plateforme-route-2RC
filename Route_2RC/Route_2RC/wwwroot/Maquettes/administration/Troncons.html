@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tronçons - Régie des routes et construction</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dash-page">
+
+    <nav class="dash-navbar">
+        <div class="dash-nav-brand">
+            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
+            <span>Régie des routes et construction</span>
+        </div>
+        <div class="dash-nav-links">
+            <div class="nav-user-profile">
+                <div class="user-avatar-badge">DT</div>
+                <div class="user-profile-info">
+                    <span class="user-profile-name">Darren Tchameni</span>
+                    <span class="user-profile-role">Super Admin</span>
+                </div>
+            </div>
+            <a href="../auth/pageaccueil.html">Accueil</a>
+            <a href="../dashboard/dashboard.html">Super Admin</a>
+            <a href="Equipes.html">Équipes</a>
+            <a href="Troncons.html" class="active">Tronçons</a>
+            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-header">
+            <div>
+                <h1>Tronçons</h1>
+                <p>Segments de route répertoriés, utilisés pour rattacher signalements et relevés.</p>
+            </div>
+            <button type="button" onclick="openModal()" class="btn-primary">+ Nouveau Tronçon</button>
+        </div>
+
+        <div class="dashboard-kpis">
+            <div class="kpi-card">
+                <div class="kpi-icon">🛣️</div>
+                <h3>Tronçons enregistrés</h3>
+                <p class="kpi-value cyan" id="kpiCount">0</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Liste des tronçons</h2>
+                <span>Sert de référence pour les signalements et les relevés terrain</span>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>NOM TRONÇON</th>
+                        <th>QUARTIER</th>
+                        <th>TOPOGRAPHIE</th>
+                        <th class="text-right">ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBodyContent"></tbody>
+            </table>
+            <p id="emptyStateMsg" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">
+                Aucun tronçon enregistré pour le moment.
+            </p>
+        </div>
+
+    </main>
+
+    <div class="dash-modal-overlay" id="newModal">
+        <div class="dash-modal-content">
+            <h3 style="margin-top:0; color:var(--text-main); font-size:1.3rem; margin-bottom:1.2rem;">Nouveau Tronçon</h3>
+            <form id="newForm" onsubmit="submitNew(event)">
+                <div class="form-group">
+                    <label for="inputNom">Nom du tronçon</label>
+                    <input type="text" id="inputNom" placeholder="Ex: Axe Rond-Point Deido - Bonabéri" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputQuartier">Quartier</label>
+                    <input type="text" id="inputQuartier" placeholder="Ex: Deido" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputTopo">Topographie</label>
+                    <div class="custom-select-wrapper">
+                        <select id="inputTopo" required>
+                            <option value="Plat">Plat</option>
+                            <option value="Vallonné">Vallonné</option>
+                            <option value="Marécageux">Marécageux</option>
+                            <option value="Montagneux">Montagneux</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Annuler</button>
+                    <button type="submit" class="btn-submit">Créer le tronçon</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="troncons.js"></script>
+</body>
+</html>

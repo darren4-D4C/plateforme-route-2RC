@@ -3,89 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnRen — Connexion</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Connexion - AnRen</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body class="login-page-container bg-network">
 
-    <div class="topbar">
-        <div class="logo-badge">
-            <img src="../assets/cud-logo.png" alt="Logo CUD">
-        </div>
-        <div class="topbar-text">
-            <div class="h1">Communauté Urbaine de Douala</div>
-            <div class="h2">Régie des Routes et de la Construction</div>
+    <div class="login-top-bar">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <img src="../assets/cud-logo.png" alt="Logo CUD" style="height: 32px;" onerror="this.style.display='none'">
+            <div style="font-size: 0.8rem; color: var(--text-muted);"><b>Communauté Urbaine de Douala</b><br>Régie des Routes et de la Construction</div>
         </div>
     </div>
 
-    <div class="card">
-        <a href="pageaccueil.html" class="back-link">
-            <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
-            Retour à l'accueil
-        </a>
+    <div class="login-wrapper">
+        <div class="login-card-exact">
+            <a href="pageaccueil.html" style="color:var(--cyan-line); text-decoration:none; font-weight:600; display:inline-block; margin-bottom: 0.8rem;">← Retour à l'accueil</a>
 
-        <div class="brand-mark">An<span>Ren</span></div>
-        <h1 class="title">Connexion</h1>
-        <p class="subtitle">Saisissez vos identifiants pour accéder à votre espace.</p>
+            <div class="login-logo-title">An<span>Ren</span></div>
+            <h2 style="font-size: 1.15rem; margin: 0.4rem 0; color: var(--text-main);">Connexion</h2>
+            <p class="login-subtitle">Saisissez vos identifiants pour accéder à votre espace.</p>
 
-        <form id="loginForm" action="../dashboard/dashboard.html" method="GET" novalidate>
-            <div class="form-group">
-                <label for="email">Adresse email ou Matricule</label>
-                <div class="input-wrapper">
-                    <input type="text" id="email" name="email" placeholder="ex: j.dupont@cud.cm ou CUD-884" required>
-                    <div class="input-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                            <circle cx="12" cy="7" r="4" />
-                        </svg>
-                    </div>
+            <form id="loginForm" action="../dashboard/dashboard.html" method="GET" novalidate>
+
+                <div class="form-group-custom">
+                    <label class="form-label-custom" for="identifiant">Adresse email ou Matricule</label>
+                    <input type="text" id="identifiant" name="identifiant" class="form-input-custom" placeholder="ex: 2RC2026CUD001" autocomplete="username">
+                    <div class="error-message-text">Veuillez renseigner ce champ.</div>
                 </div>
-                <small class="error-msg">Veuillez renseigner votre identifiant ou email.</small>
-            </div>
 
-            <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <div class="input-wrapper">
-                    <input type="password" id="password" name="password" placeholder="••••••••••••" required>
-                    <div class="input-icon">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                        </svg>
-                    </div>
+                <div class="form-group-custom">
+                    <label class="form-label-custom" for="password">Mot de passe</label>
+                    <input type="password" id="password" class="form-input-custom" placeholder="••••••••••••" autocomplete="current-password">
+                    <div class="error-message-text">Ce champ est requis.</div>
                 </div>
-                <small class="error-msg">Le mot de passe est obligatoire.</small>
-            </div>
 
-            <button type="submit" class="btn-submit">Se connecter</button>
-        </form>
+                <button type="submit" class="btn-submit-custom">Se connecter</button>
+            </form>
+
+            <p style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+                Maquette front-end : n'importe quel identifiant et mot de passe non vides suffisent pour l'instant. La vraie vérification sera faite par le backend.
+            </p>
+        </div>
     </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
-            let isValid = true;
-            const groups = this.querySelectorAll('.form-group');
-
-            groups.forEach(group => {
-                const input = group.querySelector('input');
-                if (!input.value.trim()) {
-                    isValid = false;
-                    group.classList.add('has-error');
-                } else {
-                    group.classList.remove('has-error');
-                }
-
-                input.addEventListener('input', () => {
-                    if (input.value.trim()) group.classList.remove('has-error');
-                });
-            });
-
-            if (!isValid) e.preventDefault();
-        });
-    </script>
-
+    <script src="login.js"></script>
 </body>
 </html>

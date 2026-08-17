@@ -1,10 +1,198 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Administration - Régie des routes et construction</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="dash-page">
 
+    <nav class="dash-navbar">
+        <div class="dash-nav-brand">
+            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
+            <span>Régie des routes et construction</span>
+        </div>
+        <div class="dash-nav-links">
+            <div class="nav-user-profile" onclick="openProfileModal()">
+                <div class="user-avatar-badge">DT</div>
+                <div class="user-profile-info">
+                    <span class="user-profile-name">Darren Tchameni</span>
+                    <span class="user-profile-role">Super Admin</span>
+                </div>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+            </div>
+            <a href="../auth/pageaccueil.html">Accueil</a>
+            <a href="dashboard.html" class="active">Super Admin</a>
+            <a href="../signalements/Liste.html">Signalements</a>
+            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-header">
+            <div>
+                <h1>Tableau de Bord - Super Administrateur</h1>
+                <p>Supervision globale, gestion des sous-directions et des chefs.</p>
+            </div>
+            <button type="button" onclick="openNewAdminModal()" class="btn-primary">+ Nouveau Chef</button>
+        </div>
+
+        <div class="whatsapp-layout-container">
+
+            <aside class="whatsapp-sidebar">
+                <div class="sidebar-search">
+                    <input type="text" id="serviceFilterInput" placeholder="Filtrer un service..." onkeyup="filterServices()">
+                </div>
+                <div class="sidebar-list" id="servicesListContainer">
+                    <div class="sidebar-item active" onclick="filterByService(this, 'all')">
+                        <div class="item-icon">🏛️</div>
+                        <div class="item-info">
+                            <strong>Tous les services</strong>
+                            <span>Vue globale système</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-item" onclick="filterByService(this, 'AdminBudget')">
+                        <div class="item-icon">💼</div>
+                        <div class="item-info">
+                            <strong>Admin. Générale & Budget</strong>
+                            <span>Sous-direction administration & budget</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-item" onclick="filterByService(this, 'EtudesControle')">
+                        <div class="item-icon">📐</div>
+                        <div class="item-info">
+                            <strong>Études et Contrôle</strong>
+                            <span>Sous-direction des études & contrôle</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-item" onclick="filterByService(this, 'Operations')">
+                        <div class="item-icon">🚧</div>
+                        <div class="item-info">
+                            <strong>Opérations</strong>
+                            <span>Sous-direction des opérations</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-item" onclick="filterByService(this, 'MaterielAppro')">
+                        <div class="item-icon">🚜</div>
+                        <div class="item-info">
+                            <strong>Matériel & Approvisionnements</strong>
+                            <span>Matériel, production & approvisionnements</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="whatsapp-content-pane">
+
+                <div class="dashboard-kpis">
+                    <div class="kpi-card">
+                        <div class="kpi-icon">🏛️</div>
+                        <h3>Sous-Directions</h3>
+                        <p class="kpi-value cyan" id="kpiSubCount">4</p>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">👥</div>
+                        <h3>Chefs Actifs</h3>
+                        <p class="kpi-value gold" id="kpiAdminCount">0</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Chefs de Sous-Direction & Hiérarchie</h2>
+                        <span>Gestion exclusive des chefs de sous-directions</span>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>NOM & PRÉNOM</th>
+                                <th>SOUS-DIRECTION / SERVICE</th>
+                                <th>EMAIL</th>
+                                <th>STATUT</th>
+                                <th class="text-right">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBodyContent">
+                            <!-- Rempli dynamiquement à la création, ou plus tard par le backend. Vide par défaut. -->
+                        </tbody>
+                    </table>
+                    <p id="emptyStateMsg" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">
+                        Aucun chef enregistré pour le moment.
+                    </p>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <div class="dash-modal-overlay" id="newAdminModal">
+        <div class="dash-modal-content">
+            <h3 style="margin-top:0; color:var(--text-main); font-size:1.3rem; margin-bottom:1.2rem;">Création d'un Compte Chef</h3>
+            <p style="margin-top:-0.8rem; margin-bottom:1.2rem; font-size:0.85rem; color:var(--text-muted);">
+                La personne choisit son mot de passe. Un identifiant sera généré automatiquement et envoyé avec ce mot de passe par email, en confirmation.
+            </p>
+            <form id="createAdminForm" onsubmit="submitNewAdmin(event)">
+                <div class="form-group">
+                    <label for="inputAdminName">Nom complet</label>
+                    <input type="text" id="inputAdminName" placeholder="Ex: Paul Biya" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputAdminEmail">Adresse email</label>
+                    <input type="email" id="inputAdminEmail" placeholder="Ex: p.biya@cud.cm" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Mot de passe choisi</label>
+                    <input type="password" id="inputPassword" placeholder="Choisissez un mot de passe" required>
+                </div>
+                <div class="form-group">
+                    <label for="adminSubDirSelect">Sous-Direction (Chef de)</label>
+                    <div class="custom-select-wrapper">
+                        <select id="adminSubDirSelect" required>
+                            <option value="Études et Contrôle">Chef Études & Contrôle</option>
+                            <option value="Operations">Chef Opérations</option>
+                            <option value="MaterielAppro">Chef Matériel & Approvisionnements</option>
+                            <option value="AdminBudget">Chef Admin. Générale & Budget</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAdminService">Service / Cellule (Précision)</label>
+                    <input type="text" id="inputAdminService" placeholder="Ex: Cellule Topographie" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeNewAdminModal()">Annuler</button>
+                    <button type="submit" class="btn-submit">Créer et envoyer par email</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="dash-modal-overlay" id="profileModal">
+        <div class="dash-modal-content" style="text-align: left; width: 450px;">
+            <div style="display:flex; align-items:center; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                <div style="width: 60px; height: 60px; background: #0284c7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: bold;">DT</div>
+                <div>
+                    <h3 style="margin: 0; color: var(--text-main); font-size: 1.2rem;">Darren Tchameni</h3>
+                    <span style="color: var(--cyan-line); font-size: 0.85rem; font-weight: 600;">Super Administrateur Système</span>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem; margin-bottom: 1.5rem;">
+                <div><strong>Identifiant unique :</strong> <span style="color: var(--cyan-line); font-weight: bold;">2RC2026CUD001</span></div>
+                <div><strong>Régie / Entité :</strong> Régie des routes et construction (CUD)</div>
+                <div><strong>Niveau d'accès :</strong> Contrôle Total (Super Admin)</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Compte racine du système, mis en place au déploiement initial.</div>
+            </div>
+            <div style="text-align: right;">
+                <button type="button" class="btn-submit" onclick="closeProfileModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
 </body>
 </html>

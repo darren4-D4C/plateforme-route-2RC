@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relevés Terrain - Régie des routes et construction</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dash-page">
+
+    <nav class="dash-navbar">
+        <div class="dash-nav-brand">
+            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
+            <span>Régie des routes et construction</span>
+        </div>
+        <div class="dash-nav-links">
+            <div class="nav-user-profile">
+                <div class="user-avatar-badge">EX</div>
+                <div class="user-profile-info">
+                    <span class="user-profile-name">Expert Terrain</span>
+                    <span class="user-profile-role">Études & Contrôle</span>
+                </div>
+            </div>
+            <a href="../auth/pageaccueil.html">Accueil</a>
+            <a href="Releves.html" class="active">Nouveau relevé</a>
+            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-header">
+            <div>
+                <h1>Relevés Terrain</h1>
+                <p>Saisie rapide d'un relevé topographique ou d'une donnée de pluviométrie.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section field-form-card">
+            <div class="tab-nav">
+                <button type="button" class="tab-btn is-active" data-tab="topo" onclick="switchTab('topo')">Relevé topographique</button>
+                <button type="button" class="tab-btn" data-tab="pluvio" onclick="switchTab('pluvio')">Donnée pluviométrique</button>
+            </div>
+
+            <!-- Relevé topographique -->
+            <div class="tab-panel is-active" id="panel-topo">
+                <form id="topoForm" onsubmit="submitTopo(event)">
+                    <div class="form-group">
+                        <label for="topoTroncon">Tronçon concerné</label>
+                        <input type="text" id="topoTroncon" placeholder="Ex: Axe Rond-Point Deido - Bonabéri" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="topoRelief">Type de relief</label>
+                        <div class="custom-select-wrapper">
+                            <select id="topoRelief" required>
+                                <option value="Plat">Plat</option>
+                                <option value="Vallonné">Vallonné</option>
+                                <option value="Marécageux">Marécageux</option>
+                                <option value="Montagneux">Montagneux</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="topoDate">Date du relevé</label>
+                        <input type="date" id="topoDate" required>
+                    </div>
+                    <button type="submit" class="btn-submit-custom">Enregistrer le relevé</button>
+                </form>
+            </div>
+
+            <!-- Donnée pluviométrique -->
+            <div class="tab-panel" id="panel-pluvio">
+                <form id="pluvioForm" onsubmit="submitPluvio(event)">
+                    <div class="form-group">
+                        <label for="pluvioTroncon">Tronçon concerné</label>
+                        <input type="text" id="pluvioTroncon" placeholder="Ex: Axe Rond-Point Deido - Bonabéri" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pluvioNiveau">Niveau de pluie (mm)</label>
+                        <input type="number" id="pluvioNiveau" min="0" step="0.1" placeholder="Ex: 42.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pluvioDate">Date du relevé</label>
+                        <input type="date" id="pluvioDate" required>
+                    </div>
+                    <button type="submit" class="btn-submit-custom">Enregistrer la donnée</button>
+                </form>
+            </div>
+
+            <div class="report-confirmation" id="fieldConfirmation">
+                <div class="rc-icon">✅</div>
+                <h2>Relevé enregistré</h2>
+                <p>Il sera transmis au Chef Études & Contrôle pour la priorisation des chantiers.</p>
+                <button type="button" class="btn-hero-signal btn-hero-primary" onclick="resetConfirmation()">Saisir un autre relevé</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="releves.js"></script>
+</body>
+</html>

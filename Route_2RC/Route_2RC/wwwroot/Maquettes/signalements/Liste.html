@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signalements - Régie des routes et construction</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dash-page">
+
+    <nav class="dash-navbar">
+        <div class="dash-nav-brand">
+            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
+            <span>Régie des routes et construction</span>
+        </div>
+        <div class="dash-nav-links">
+            <div class="nav-user-profile">
+                <div class="user-avatar-badge">DT</div>
+                <div class="user-profile-info">
+                    <span class="user-profile-name">Darren Tchameni</span>
+                    <span class="user-profile-role">Super Admin</span>
+                </div>
+            </div>
+            <a href="../auth/pageaccueil.html">Accueil</a>
+            <a href="../dashboard/dashboard.html">Super Admin</a>
+            <a href="Liste.html" class="active">Signalements</a>
+            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-header">
+            <div>
+                <h1>Signalements</h1>
+                <p>Dégradations remontées par les citoyens, en attente d'analyse et de priorisation.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-kpis">
+            <div class="kpi-card">
+                <div class="kpi-icon">📋</div>
+                <h3>Signalements reçus</h3>
+                <p class="kpi-value cyan" id="kpiTotal">0</p>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">⏳</div>
+                <h3>En attente de traitement</h3>
+                <p class="kpi-value gold" id="kpiPending">0</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Liste des signalements</h2>
+                <span>Le score de priorité sera calculé automatiquement par le backend</span>
+            </div>
+
+            <div class="list-toolbar">
+                <div class="search-input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Rechercher par type ou localisation..." onkeyup="filterSignalements()">
+                </div>
+                <div class="select-with-icon">
+                    <select id="statutFilter" onchange="filterSignalements()">
+                        <option value="all">Tous les statuts</option>
+                        <option value="nouveau">Nouveau</option>
+                        <option value="encours">En cours</option>
+                        <option value="traite">Traité</option>
+                        <option value="rejete">Rejeté</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th onclick="sortBy(0)" style="cursor:pointer;">TYPE ⇅</th>
+                        <th onclick="sortBy(1)" style="cursor:pointer;">LOCALISATION ⇅</th>
+                        <th onclick="sortBy(2)" style="cursor:pointer;">DATE ⇅</th>
+                        <th>STATUT</th>
+                        <th class="text-right">ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBodyContent">
+                    <!-- Rempli par le backend (SignalementController) une fois branché. Vide par défaut. -->
+                </tbody>
+            </table>
+            <p id="emptyStateMsg" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">
+                Aucun signalement pour le moment. Les signalements citoyens apparaîtront ici automatiquement une fois le backend connecté.
+            </p>
+        </div>
+
+    </main>
+
+    <script src="liste.js"></script>
+</body>
+</html>

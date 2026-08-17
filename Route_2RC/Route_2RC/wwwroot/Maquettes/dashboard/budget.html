@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Admin & Budget - Régie des routes et construction</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dash-page">
+
+    <nav class="dash-navbar">
+        <div class="dash-nav-brand">
+            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
+            <span>Régie des routes et construction</span>
+        </div>
+        <div class="dash-nav-links">
+            <div class="nav-user-profile" onclick="openProfileModal()">
+                <div class="user-avatar-badge">CB</div>
+                <div class="user-profile-info">
+                    <span class="user-profile-name">Chef Admin & Budget</span>
+                    <span class="user-profile-role">Admin. Générale & Budget</span>
+                </div>
+            </div>
+            <a href="../auth/pageaccueil.html">Accueil</a>
+            <a href="budget.html" class="active">Tableau de Bord</a>
+            <a href="../signalements/Liste.html">Signalements</a>
+            <a href="../interventions/Liste.html">Interventions</a>
+            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-header">
+            <div>
+                <h1>Tableau de Bord - Admin & Budget</h1>
+                <p>Supervision des coûts engagés sur l'ensemble des interventions.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-kpis">
+            <div class="kpi-card">
+                <div class="kpi-icon">💰</div>
+                <h3>Coût total engagé</h3>
+                <p class="kpi-value cyan" id="kpiCost">0 FCFA</p>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">🚧</div>
+                <h3>Interventions financées</h3>
+                <p class="kpi-value gold" id="kpiFunded">0</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Coûts par intervention</h2>
+                <a href="../interventions/Liste.html" class="section-subtitle-link">Voir toutes les interventions →</a>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9rem;">
+                Le détail du coût (matériaux + engins) de chaque chantier est visible sur sa page de détail, dans Interventions.
+            </p>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Mon équipe</h2>
+                <button type="button" class="btn-primary" onclick="openModal()">+ Nouveau Membre</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>NOM & PRÉNOM</th>
+                        <th>RÔLE</th>
+                        <th>EMAIL</th>
+                        <th>STATUT</th>
+                        <th class="text-right">ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBodyContent"></tbody>
+            </table>
+            <p id="emptyStateMsg" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">
+                Aucun membre d'équipe enregistré pour le moment.
+            </p>
+        </div>
+
+    </main>
+
+    <div class="dash-modal-overlay" id="profileModal">
+        <div class="dash-modal-content" style="text-align: left; width: 420px;">
+            <div style="display:flex; align-items:center; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                <div style="width: 56px; height: 56px; background: #0284c7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold;">CB</div>
+                <div>
+                    <h3 style="margin: 0; color: var(--text-main); font-size: 1.1rem;">Chef Admin & Budget</h3>
+                    <span style="color: var(--cyan-line); font-size: 0.85rem; font-weight: 600;">Admin. Générale & Budget</span>
+                </div>
+            </div>
+            <form onsubmit="submitPasswordChange(event)">
+                <div class="form-group">
+                    <label for="currentPassword">Mot de passe actuel</label>
+                    <input type="password" id="currentPassword" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Nouveau mot de passe</label>
+                    <input type="password" id="newPassword" placeholder="••••••••" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeProfileModal()">Fermer</button>
+                    <button type="submit" class="btn-submit">Changer le mot de passe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="dash-modal-overlay" id="newModal">
+        <div class="dash-modal-content">
+            <h3 style="margin-top:0; font-size:1.3rem; margin-bottom:1.2rem;">Nouveau Membre d'Équipe</h3>
+            <p style="margin-top:-0.8rem; margin-bottom:1.2rem; font-size:0.85rem; color:var(--text-muted);">
+                La personne choisit son mot de passe. Un identifiant sera généré et envoyé par email.
+            </p>
+            <form id="newForm" onsubmit="submitNew(event)">
+                <div class="form-group">
+                    <label for="inputNom">Nom complet</label>
+                    <input type="text" id="inputNom" placeholder="Ex: Joséphine Ngo Mbe" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Adresse email</label>
+                    <input type="email" id="inputEmail" placeholder="Ex: j.ngombe@cud.cm" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Mot de passe choisi</label>
+                    <input type="password" id="inputPassword" placeholder="Choisissez un mot de passe" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputRole">Rôle</label>
+                    <div class="custom-select-wrapper">
+                        <select id="inputRole" required>
+                            <option value="Contrôleur Financier">Contrôleur Financier</option>
+                            <option value="Assistant Administratif">Assistant Administratif</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Annuler</button>
+                    <button type="submit" class="btn-submit">Créer et envoyer par email</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="budget.js"></script>
+</body>
+</html>

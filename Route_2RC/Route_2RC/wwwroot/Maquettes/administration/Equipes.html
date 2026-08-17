@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Équipes - Régie des routes et construction</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dash-page">
+
+    <nav class="dash-navbar">
+        <div class="dash-nav-brand">
+            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
+            <span>Régie des routes et construction</span>
+        </div>
+        <div class="dash-nav-links">
+            <div class="nav-user-profile">
+                <div class="user-avatar-badge">DT</div>
+                <div class="user-profile-info">
+                    <span class="user-profile-name">Darren Tchameni</span>
+                    <span class="user-profile-role">Super Admin</span>
+                </div>
+            </div>
+            <a href="../auth/pageaccueil.html">Accueil</a>
+            <a href="../dashboard/dashboard.html">Super Admin</a>
+            <a href="Equipes.html" class="active">Équipes</a>
+            <a href="Troncons.html">Tronçons</a>
+            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-header">
+            <div>
+                <h1>Équipes</h1>
+                <p>Équipes spécialisées mobilisées sur les chantiers de réhabilitation.</p>
+            </div>
+            <button type="button" onclick="openModal()" class="btn-primary">+ Nouvelle Équipe</button>
+        </div>
+
+        <div class="dashboard-kpis">
+            <div class="kpi-card">
+                <div class="kpi-icon">👷</div>
+                <h3>Équipes actives</h3>
+                <p class="kpi-value cyan" id="kpiCount">0</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2>Liste des équipes</h2>
+                <span>Chaque équipe couvre une zone donnée</span>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>NOM ÉQUIPE</th>
+                        <th>ZONE</th>
+                        <th>STATUT</th>
+                        <th class="text-right">ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBodyContent"></tbody>
+            </table>
+            <p id="emptyStateMsg" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">
+                Aucune équipe enregistrée pour le moment.
+            </p>
+        </div>
+
+    </main>
+
+    <div class="dash-modal-overlay" id="newModal">
+        <div class="dash-modal-content">
+            <h3 style="margin-top:0; color:var(--text-main); font-size:1.3rem; margin-bottom:1.2rem;">Nouvelle Équipe</h3>
+            <form id="newForm" onsubmit="submitNew(event)">
+                <div class="form-group">
+                    <label for="inputNom">Nom de l'équipe</label>
+                    <input type="text" id="inputNom" placeholder="Ex: Équipe Bitumage Nord" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputZone">Zone couverte</label>
+                    <input type="text" id="inputZone" placeholder="Ex: Douala 3ème, Logbaba" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">Annuler</button>
+                    <button type="submit" class="btn-submit">Créer l'équipe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="equipes.js"></script>
+</body>
+</html>

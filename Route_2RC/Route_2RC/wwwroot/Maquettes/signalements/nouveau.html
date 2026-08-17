@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signaler une dégradation - AnRen</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="home-page bg-network">
+
+    <nav class="home-navbar">
+        <div class="home-nav-brand">
+            <img src="../assets/cud-logo.png" alt="Logo CUD" onerror="this.style.display='none'">
+            <span>Régie des routes et construction</span>
+        </div>
+        <div class="home-nav-links">
+            <a href="../auth/pageaccueil.html">Accueil</a>
+            <a href="nouveau.html" class="active">Signaler un problème</a>
+            <a href="../auth/Login.html" class="btn-nav-login">Accédez à votre compte</a>
+        </div>
+    </nav>
+
+    <div class="report-wrapper">
+        <div class="report-card">
+
+            <form id="reportForm">
+                <a href="../auth/pageaccueil.html" style="color:var(--cyan-line); text-decoration:none; font-weight:600; font-size:0.85rem;">← Retour à l'accueil</a>
+                <h1>🚧 Signaler une dégradation</h1>
+                <p class="report-intro">Aucun compte n'est nécessaire. Quelques informations suffisent.</p>
+
+                <div class="report-section">
+                    <span class="report-section-label">1. Type de dégradation</span>
+                    <div class="degradation-type-grid">
+                        <div class="degradation-type-option">
+                            <input type="radio" name="typeDegradation" id="typeNid" value="Nid-de-poule" required>
+                            <label for="typeNid"><span class="dt-icon">🕳️</span> Nid-de-poule</label>
+                        </div>
+                        <div class="degradation-type-option">
+                            <input type="radio" name="typeDegradation" id="typeChaussee" value="Chaussée dégradée">
+                            <label for="typeChaussee"><span class="dt-icon">🛣️</span> Chaussée dégradée</label>
+                        </div>
+                        <div class="degradation-type-option">
+                            <input type="radio" name="typeDegradation" id="typeDrain" value="Drain obstrué">
+                            <label for="typeDrain"><span class="dt-icon">🚰</span> Drain obstrué</label>
+                        </div>
+                        <div class="degradation-type-option">
+                            <input type="radio" name="typeDegradation" id="typeAutre" value="Autre">
+                            <label for="typeAutre"><span class="dt-icon">⚠️</span> Autre</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-section">
+                    <span class="report-section-label">2. Localisation</span>
+                    <div class="location-box">
+                        <span class="location-status" id="locationStatus">Position non détectée</span>
+                        <button type="button" class="btn-locate" id="btnLocate" onclick="detectLocation()">📍 Localiser automatiquement</button>
+                    </div>
+                    <input type="hidden" id="latitude" name="latitude">
+                    <input type="hidden" id="longitude" name="longitude">
+                </div>
+
+                <div class="report-section">
+                    <span class="report-section-label">3. Photo</span>
+                    <div class="photo-drop" id="photoDrop">
+                        <input type="file" id="photoInput" accept="image/*" capture="environment">
+                        <span class="photo-drop-text">📷 Prendre une photo ou en choisir une</span>
+                    </div>
+                    <img id="photoPreview" class="photo-preview" alt="Aperçu de la photo">
+                </div>
+
+                <div class="report-section">
+                    <span class="report-section-label">4. Description (optionnel)</span>
+                    <textarea class="report-textarea" id="description" name="description" placeholder="Ex: Grand nid-de-poule au milieu de la voie, dangereux la nuit..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit-custom">Envoyer le signalement</button>
+            </form>
+
+            <div class="report-confirmation" id="reportConfirmation">
+                <div class="rc-icon">✅</div>
+                <h2>Merci pour votre signalement !</h2>
+                <p>Il a été transmis à la Régie des routes et construction. L'équipe des Études l'analysera pour planifier une intervention.</p>
+                <a href="../auth/pageaccueil.html" class="btn-hero-signal btn-hero-primary">Retour à l'accueil</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="nouveau.js"></script>
+</body>
+</html>

@@ -13,9 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\Maquettes\interventions\" />
-    <Folder Include="wwwroot\Maquettes\administration\" />
-    <Folder Include="wwwroot\Maquettes\signalements\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Références - Régie des routes et construction</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dash-page">
+
+    <nav class="dash-navbar">
+        <div class="dash-nav-brand">
+            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
+            <span>Régie des routes et construction</span>
+        </div>
+        <div class="dash-nav-links">
+            <div class="nav-user-profile">
+                <div class="user-avatar-badge">DT</div>
+                <div class="user-profile-info">
+                    <span class="user-profile-name">Darren Tchameni</span>
+                    <span class="user-profile-role">Super Admin</span>
+                </div>
+            </div>
+            <a href="../auth/pageaccueil.html">Accueil</a>
+            <a href="../dashboard/dashboard.html">Super Admin</a>
+            <a href="Equipes.html">Équipes</a>
+            <a href="Troncons.html">Tronçons</a>
+            <a href="References.html" class="active">Références</a>
+            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-header">
+            <div>
+                <h1>Références</h1>
+                <p>Données de référence utilisées dans les signalements et les interventions.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="tab-nav">
+                <button type="button" class="tab-btn is-active" data-tab="degradation" onclick="switchTab('degradation')">Types de dégradation</button>
+                <button type="button" class="tab-btn" data-tab="materiau" onclick="switchTab('materiau')">Matériaux</button>
+                <button type="button" class="tab-btn" data-tab="engin" onclick="switchTab('engin')">Engins</button>
+            </div>
+
+            <!-- Onglet : Types de dégradation -->
+            <div class="tab-panel is-active" id="panel-degradation">
+                <div class="section-header">
+                    <h2>Types de dégradation</h2>
+                    <button type="button" class="btn-primary" onclick="openModal('degradation')">+ Ajouter</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>LIBELLÉ</th><th>DESCRIPTION</th><th class="text-right">ACTIONS</th></tr>
+                    </thead>
+                    <tbody id="table-degradation"></tbody>
+                </table>
+                <p class="empty-msg" data-for="degradation" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">Aucun type enregistré pour le moment.</p>
+            </div>
+
+            <!-- Onglet : Matériaux -->
+            <div class="tab-panel" id="panel-materiau">
+                <div class="section-header">
+                    <h2>Matériaux</h2>
+                    <button type="button" class="btn-primary" onclick="openModal('materiau')">+ Ajouter</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>NOM</th><th>UNITÉ</th><th>COÛT UNITAIRE (FCFA)</th><th class="text-right">ACTIONS</th></tr>
+                    </thead>
+                    <tbody id="table-materiau"></tbody>
+                </table>
+                <p class="empty-msg" data-for="materiau" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">Aucun matériau enregistré pour le moment.</p>
+            </div>
+
+            <!-- Onglet : Engins -->
+            <div class="tab-panel" id="panel-engin">
+                <div class="section-header">
+                    <h2>Engins</h2>
+                    <button type="button" class="btn-primary" onclick="openModal('engin')">+ Ajouter</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>NOM</th><th>TYPE</th><th>COÛT CARBURANT/HEURE (FCFA)</th><th class="text-right">ACTIONS</th></tr>
+                    </thead>
+                    <tbody id="table-engin"></tbody>
+                </table>
+                <p class="empty-msg" data-for="engin" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">Aucun engin enregistré pour le moment.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modale : Type de dégradation -->
+    <div class="dash-modal-overlay" id="modal-degradation">
+        <div class="dash-modal-content">
+            <h3 style="margin-top:0; font-size:1.3rem; margin-bottom:1.2rem;">Nouveau Type de Dégradation</h3>
+            <form onsubmit="submitDegradation(event)">
+                <div class="form-group">
+                    <label for="degLibelle">Libellé</label>
+                    <input type="text" id="degLibelle" placeholder="Ex: Nid-de-poule" required>
+                </div>
+                <div class="form-group">
+                    <label for="degDescription">Description</label>
+                    <input type="text" id="degDescription" placeholder="Ex: Cavité dans la chaussée" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModal('degradation')">Annuler</button>
+                    <button type="submit" class="btn-submit">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modale : Matériau -->
+    <div class="dash-modal-overlay" id="modal-materiau">
+        <div class="dash-modal-content">
+            <h3 style="margin-top:0; font-size:1.3rem; margin-bottom:1.2rem;">Nouveau Matériau</h3>
+            <form onsubmit="submitMateriau(event)">
+                <div class="form-group">
+                    <label for="matNom">Nom</label>
+                    <input type="text" id="matNom" placeholder="Ex: Bitume" required>
+                </div>
+                <div class="form-group">
+                    <label for="matUnite">Unité</label>
+                    <div class="custom-select-wrapper">
+                        <select id="matUnite" required>
+                            <option value="Sac">Sac</option>
+                            <option value="Tonne">Tonne</option>
+                            <option value="m³">m³</option>
+                            <option value="Litre">Litre</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="matCout">Coût unitaire (FCFA)</label>
+                    <input type="number" id="matCout" min="0" placeholder="Ex: 15000" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModal('materiau')">Annuler</button>
+                    <button type="submit" class="btn-submit">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modale : Engin -->
+    <div class="dash-modal-overlay" id="modal-engin">
+        <div class="dash-modal-content">
+            <h3 style="margin-top:0; font-size:1.3rem; margin-bottom:1.2rem;">Nouvel Engin</h3>
+            <form onsubmit="submitEngin(event)">
+                <div class="form-group">
+                    <label for="engNom">Nom</label>
+                    <input type="text" id="engNom" placeholder="Ex: Compacteur CAT CB10" required>
+                </div>
+                <div class="form-group">
+                    <label for="engType">Type</label>
+                    <input type="text" id="engType" placeholder="Ex: Compacteur" required>
+                </div>
+                <div class="form-group">
+                    <label for="engCout">Coût carburant / heure (FCFA)</label>
+                    <input type="number" id="engCout" min="0" placeholder="Ex: 8000" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancel" onclick="closeModal('engin')">Annuler</button>
+                    <button type="submit" class="btn-submit">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="references.js"></script>
+</body>
+</html>
