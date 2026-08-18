@@ -1,179 +1,265 @@
 ﻿<!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
+
+    &#x20;
     <meta charset="UTF-8">
+
+    &#x20;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Références - Régie des routes et construction</title>
+
+    &#x20;
+    <title>Références — Régie des Routes et Construction</title>
+
+    &#x20;
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
-<body class="dash-page">
 
-    <nav class="dash-navbar">
-        <div class="dash-nav-brand">
-            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
-            <span>Régie des routes et construction</span>
-        </div>
-        <div class="dash-nav-links">
-            <div class="nav-user-profile">
-                <div class="user-avatar-badge">DT</div>
-                <div class="user-profile-info">
-                    <span class="user-profile-name">Darren Tchameni</span>
-                    <span class="user-profile-role">Super Admin</span>
-                </div>
-            </div>
-            <a href="../auth/pageaccueil.html">Accueil</a>
-            <a href="../dashboard/dashboard.html">Super Admin</a>
-            <a href="Equipes.html">Équipes</a>
-            <a href="Troncons.html">Tronçons</a>
-            <a href="References.html" class="active">Références</a>
-            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
-        </div>
-    </nav>
+<body>
 
-    <main class="dashboard-main">
+    <div class="layout">
 
-        <div class="dashboard-header">
-            <div>
-                <h1>Références</h1>
-                <p>Données de référence utilisées dans les signalements et les interventions.</p>
-            </div>
-        </div>
+        &#x20;   <aside class="sidebar">
 
-        <div class="dashboard-section">
-            <div class="tab-nav">
-                <button type="button" class="tab-btn is-active" data-tab="degradation" onclick="switchTab('degradation')">Types de dégradation</button>
-                <button type="button" class="tab-btn" data-tab="materiau" onclick="switchTab('materiau')">Matériaux</button>
-                <button type="button" class="tab-btn" data-tab="engin" onclick="switchTab('engin')">Engins</button>
-            </div>
+            &#x20;       <div class="brand"><div class="brand-mark">2RC</div><div class="brand-text"><strong>AnRen</strong><span>Régie des Routes et Construction</span></div></div>
 
-            <!-- Onglet : Types de dégradation -->
-            <div class="tab-panel is-active" id="panel-degradation">
-                <div class="section-header">
-                    <h2>Types de dégradation</h2>
-                    <button type="button" class="btn-primary" onclick="openModal('degradation')">+ Ajouter</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr><th>LIBELLÉ</th><th>DESCRIPTION</th><th class="text-right">ACTIONS</th></tr>
-                    </thead>
-                    <tbody id="table-degradation"></tbody>
-                </table>
-                <p class="empty-msg" data-for="degradation" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">Aucun type enregistré pour le moment.</p>
+            &#x20;       <nav class="nav">
+
+                &#x20;           <p class="nav-label">Pilotage</p>
+
+                &#x20;           <a class="nav-link" href="../dashboard/dashboard.html">Tableau de bord</a>
+
+                &#x20;           <a class="nav-link" href="../signalements/Liste.html">Signalements</a>
+
+                &#x20;           <a class="nav-link" href="../interventions/Liste.html">Interventions</a>
+
+                &#x20;           <p class="nav-label">Référentiel</p>
+
+                &#x20;           <a class="nav-link" href="Troncons.html">Tronçons</a>
+
+                &#x20;           <a class="nav-link" href="Equipes.html">Équipes</a>
+
+                &#x20;           <a class="nav-link active" href="References.html">Références</a>
+
+                &#x20;           <a class="nav-link" href="Releves.html">Relevés</a>
+
+                &#x20;
+            </nav>
+
+            &#x20;       <div class="sidebar-footer"><div class="user"><div class="user-avatar">DT</div><div class="user-meta"><strong>Darren Tchameni</strong><span>Administrateur</span></div></div><a class="logout" href="../auth/Login.html">Déconnexion</a></div>
+
+            &#x20;
+        </aside>
+
+        &#x20;   <div class="overlay" onclick="closeMenu()"></div>
+
+        &#x20;   <main class="main">
+
+            &#x20;       <div class="topbar">
+
+                &#x20;           <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+
+                &#x20;           <div class="breadcrumb">Référentiel \&nbsp;\&rsaquo;\&nbsp; Références</div>
+
+                &#x20;           <input type="text" class="search" placeholder="Rechercher...">
+
+                &#x20;
             </div>
 
-            <!-- Onglet : Matériaux -->
-            <div class="tab-panel" id="panel-materiau">
-                <div class="section-header">
-                    <h2>Matériaux</h2>
-                    <button type="button" class="btn-primary" onclick="openModal('materiau')">+ Ajouter</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr><th>NOM</th><th>UNITÉ</th><th>COÛT UNITAIRE (FCFA)</th><th class="text-right">ACTIONS</th></tr>
-                    </thead>
-                    <tbody id="table-materiau"></tbody>
-                </table>
-                <p class="empty-msg" data-for="materiau" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">Aucun matériau enregistré pour le moment.</p>
-            </div>
+            &#x20;       <div class="page-head"><div><h1>Références</h1><p>Données de référence utilisées dans les signalements et les interventions.</p></div></div>
 
-            <!-- Onglet : Engins -->
-            <div class="tab-panel" id="panel-engin">
-                <div class="section-header">
-                    <h2>Engins</h2>
-                    <button type="button" class="btn-primary" onclick="openModal('engin')">+ Ajouter</button>
-                </div>
-                <table>
-                    <thead>
-                        <tr><th>NOM</th><th>TYPE</th><th>COÛT CARBURANT/HEURE (FCFA)</th><th class="text-right">ACTIONS</th></tr>
-                    </thead>
-                    <tbody id="table-engin"></tbody>
-                </table>
-                <p class="empty-msg" data-for="engin" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">Aucun engin enregistré pour le moment.</p>
-            </div>
-        </div>
 
-    </main>
 
-    <!-- Modale : Type de dégradation -->
-    <div class="dash-modal-overlay" id="modal-degradation">
-        <div class="dash-modal-content">
-            <h3 style="margin-top:0; font-size:1.3rem; margin-bottom:1.2rem;">Nouveau Type de Dégradation</h3>
-            <form onsubmit="submitDegradation(event)">
-                <div class="form-group">
-                    <label for="degLibelle">Libellé</label>
-                    <input type="text" id="degLibelle" placeholder="Ex: Nid-de-poule" required>
+            &#x20;       <section class="card">
+
+                &#x20;           <div class="card-head"><h2>Types de dégradation</h2><button class="btn-primary" onclick="openModal('modalType')">+ Ajouter</button></div>
+
+                &#x20;           <div class="table-scroll">
+
+                    &#x20;               <table class="data-table" id="tableTypes">
+
+                        &#x20;
+                        <thead><tr><th>Libellé</th><th>Description</th><th class="text-right">Action</th></tr></thead>
+
+                        &#x20;
+                        <tbody>
+
+                            &#x20;
+                            <tr><td class="strong">Nid-de-poule</td><td>Cavité dans la chaussée</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Chaussée dégradée</td><td>Revêtement fissuré ou affaissé</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Drain obstrué</td><td>Écoulement des eaux bloqué</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                        </tbody>
+
+                        &#x20;
+                    </table>
+
+                    &#x20;
                 </div>
-                <div class="form-group">
-                    <label for="degDescription">Description</label>
-                    <input type="text" id="degDescription" placeholder="Ex: Cavité dans la chaussée" required>
+
+                &#x20;
+            </section>
+
+
+
+            &#x20;       <section class="card">
+
+                &#x20;           <div class="card-head"><h2>Matériaux</h2><button class="btn-primary" onclick="openModal('modalMateriau')">+ Ajouter</button></div>
+
+                &#x20;           <div class="table-scroll">
+
+                    &#x20;               <table class="data-table" id="tableMateriaux">
+
+                        &#x20;
+                        <thead><tr><th>Nom</th><th>Unité</th><th>Coût unitaire (FCFA)</th><th class="text-right">Action</th></tr></thead>
+
+                        &#x20;
+                        <tbody>
+
+                            &#x20;
+                            <tr><td class="strong">Bitume</td><td>Tonne</td><td>15 000</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Sable</td><td>m³</td><td>8 000</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Ciment</td><td>Sac</td><td>6 500</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                        </tbody>
+
+                        &#x20;
+                    </table>
+
+                    &#x20;
                 </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-cancel" onclick="closeModal('degradation')">Annuler</button>
-                    <button type="submit" class="btn-submit">Ajouter</button>
+
+                &#x20;
+            </section>
+
+
+
+            &#x20;       <section class="card">
+
+                &#x20;           <div class="card-head"><h2>Engins</h2><button class="btn-primary" onclick="openModal('modalEngin')">+ Ajouter</button></div>
+
+                &#x20;           <div class="table-scroll">
+
+                    &#x20;               <table class="data-table" id="tableEngins">
+
+                        &#x20;
+                        <thead><tr><th>Nom</th><th>Type</th><th>Coût carburant/heure (FCFA)</th><th class="text-right">Action</th></tr></thead>
+
+                        &#x20;
+                        <tbody>
+
+                            &#x20;
+                            <tr><td class="strong">Compacteur CAT CB10</td><td>Compacteur</td><td>8 000</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Niveleuse 140K</td><td>Niveleuse</td><td>12 000</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                        </tbody>
+
+                        &#x20;
+                    </table>
+
+                    &#x20;
                 </div>
-            </form>
-        </div>
+
+                &#x20;           <p class="note">Données d'exemple — seront remplacées par la base de données.</p>
+
+                &#x20;
+            </section>
+
+            &#x20;
+        </main>
+
     </div>
 
-    <!-- Modale : Matériau -->
-    <div class="dash-modal-overlay" id="modal-materiau">
-        <div class="dash-modal-content">
-            <h3 style="margin-top:0; font-size:1.3rem; margin-bottom:1.2rem;">Nouveau Matériau</h3>
-            <form onsubmit="submitMateriau(event)">
-                <div class="form-group">
-                    <label for="matNom">Nom</label>
-                    <input type="text" id="matNom" placeholder="Ex: Bitume" required>
-                </div>
-                <div class="form-group">
-                    <label for="matUnite">Unité</label>
-                    <div class="custom-select-wrapper">
-                        <select id="matUnite" required>
-                            <option value="Sac">Sac</option>
-                            <option value="Tonne">Tonne</option>
-                            <option value="m³">m³</option>
-                            <option value="Litre">Litre</option>
-                        </select>
-                        <i class="fa-solid fa-chevron-down select-arrow"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="matCout">Coût unitaire (FCFA)</label>
-                    <input type="number" id="matCout" min="0" placeholder="Ex: 15000" required>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-cancel" onclick="closeModal('materiau')">Annuler</button>
-                    <button type="submit" class="btn-submit">Ajouter</button>
-                </div>
+
+
+    <div class="modal-overlay" id="modalType">
+
+        &#x20;   <div class="modal">
+
+            &#x20;       <h3>Nouveau type de dégradation</h3>
+
+            &#x20;       <form onsubmit="addRow(event, 'tableTypes', 'modalType')">
+
+                &#x20;           <div class="form-group"><label>Libellé</label><input type="text" placeholder="Ex : Nid-de-poule" required></div>
+
+                &#x20;           <div class="form-group"><label>Description</label><input type="text" placeholder="Ex : Cavité dans la chaussée" required></div>
+
+                &#x20;           <div class="modal-actions"><button type="button" class="btn-cancel" onclick="closeModal('modalType')">Annuler</button><button type="submit" class="btn-primary">Ajouter</button></div>
+
+                &#x20;
             </form>
+
+            &#x20;
         </div>
+
     </div>
 
-    <!-- Modale : Engin -->
-    <div class="dash-modal-overlay" id="modal-engin">
-        <div class="dash-modal-content">
-            <h3 style="margin-top:0; font-size:1.3rem; margin-bottom:1.2rem;">Nouvel Engin</h3>
-            <form onsubmit="submitEngin(event)">
-                <div class="form-group">
-                    <label for="engNom">Nom</label>
-                    <input type="text" id="engNom" placeholder="Ex: Compacteur CAT CB10" required>
-                </div>
-                <div class="form-group">
-                    <label for="engType">Type</label>
-                    <input type="text" id="engType" placeholder="Ex: Compacteur" required>
-                </div>
-                <div class="form-group">
-                    <label for="engCout">Coût carburant / heure (FCFA)</label>
-                    <input type="number" id="engCout" min="0" placeholder="Ex: 8000" required>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-cancel" onclick="closeModal('engin')">Annuler</button>
-                    <button type="submit" class="btn-submit">Ajouter</button>
-                </div>
+    <div class="modal-overlay" id="modalMateriau">
+
+        &#x20;   <div class="modal">
+
+            &#x20;       <h3>Nouveau matériau</h3>
+
+            &#x20;       <form onsubmit="addRow(event, 'tableMateriaux', 'modalMateriau')">
+
+                &#x20;           <div class="form-group"><label>Nom</label><input type="text" placeholder="Ex : Bitume" required></div>
+
+                &#x20;           <div class="form-group"><label>Unité</label><select><option>Sac</option><option>Tonne</option><option>m³</option><option>Litre</option></select></div>
+
+                &#x20;           <div class="form-group"><label>Coût unitaire (FCFA)</label><input type="number" min="0" placeholder="Ex : 15000" required></div>
+
+                &#x20;           <div class="modal-actions"><button type="button" class="btn-cancel" onclick="closeModal('modalMateriau')">Annuler</button><button type="submit" class="btn-primary">Ajouter</button></div>
+
+                &#x20;
             </form>
+
+            &#x20;
         </div>
+
     </div>
 
-    <script src="references.js"></script>
+    <div class="modal-overlay" id="modalEngin">
+
+        &#x20;   <div class="modal">
+
+            &#x20;       <h3>Nouvel engin</h3>
+
+            &#x20;       <form onsubmit="addRow(event, 'tableEngins', 'modalEngin')">
+
+                &#x20;           <div class="form-group"><label>Nom</label><input type="text" placeholder="Ex : Compacteur CAT CB10" required></div>
+
+                &#x20;           <div class="form-group"><label>Type</label><input type="text" placeholder="Ex : Compacteur" required></div>
+
+                &#x20;           <div class="form-group"><label>Coût carburant/heure (FCFA)</label><input type="number" min="0" placeholder="Ex : 8000" required></div>
+
+                &#x20;           <div class="modal-actions"><button type="button" class="btn-cancel" onclick="closeModal('modalEngin')">Annuler</button><button type="submit" class="btn-primary">Ajouter</button></div>
+
+                &#x20;
+            </form>
+
+            &#x20;
+        </div>
+
+    </div>
+
+    <script src="../js/menu.js"></script>
+
 </body>
+
 </html>

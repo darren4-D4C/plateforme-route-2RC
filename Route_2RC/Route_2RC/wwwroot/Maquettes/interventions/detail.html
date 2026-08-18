@@ -1,130 +1,309 @@
 ﻿<!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
+
+    &#x20;
     <meta charset="UTF-8">
+
+    &#x20;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détail Intervention - Régie des routes et construction</title>
+
+    &#x20;
+    <title>Interventions — Régie des Routes et Construction</title>
+
+    &#x20;
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
-<body class="dash-page">
 
-    <nav class="dash-navbar">
-        <div class="dash-nav-brand">
-            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
-            <span>Régie des routes et construction</span>
-        </div>
-        <div class="dash-nav-links">
-            <div class="nav-user-profile">
-                <div class="user-avatar-badge">CO</div>
-                <div class="user-profile-info">
-                    <span class="user-profile-name">Chef Opérations</span>
-                    <span class="user-profile-role">Opérations</span>
-                </div>
+<body>
+
+    <div class="layout">
+
+        &#x20;   <aside class="sidebar">
+
+            &#x20;       <div class="brand"><div class="brand-mark">2RC</div><div class="brand-text"><strong>AnRen</strong><span>Régie des Routes et Construction</span></div></div>
+
+            &#x20;       <nav class="nav">
+
+                &#x20;           <p class="nav-label">Pilotage</p>
+
+                &#x20;           <a class="nav-link" href="../dashboard/dashboard.html">Tableau de bord</a>
+
+                &#x20;           <a class="nav-link" href="../signalements/Liste.html">Signalements</a>
+
+                &#x20;           <a class="nav-link active" href="Liste.html">Interventions</a>
+
+                &#x20;           <p class="nav-label">Référentiel</p>
+
+                &#x20;           <a class="nav-link" href="../administration/Troncons.html">Tronçons</a>
+
+                &#x20;           <a class="nav-link" href="../administration/Equipes.html">Équipes</a>
+
+                &#x20;           <a class="nav-link" href="../administration/References.html">Références</a>
+
+                &#x20;           <a class="nav-link" href="../administration/Releves.html">Relevés</a>
+
+                &#x20;
+            </nav>
+
+            &#x20;       <div class="sidebar-footer"><div class="user"><div class="user-avatar">DT</div><div class="user-meta"><strong>Darren Tchameni</strong><span>Administrateur</span></div></div><a class="logout" href="../auth/Login.html">Déconnexion</a></div>
+
+            &#x20;
+        </aside>
+
+        &#x20;   <div class="overlay" onclick="closeMenu()"></div>
+
+        &#x20;   <main class="main">
+
+            &#x20;       <div class="topbar">
+
+                &#x20;           <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+
+                &#x20;           <div class="breadcrumb">Pilotage \&nbsp;\&rsaquo;\&nbsp; Interventions</div>
+
+                &#x20;           <input type="text" class="search" placeholder="Rechercher...">
+
+                &#x20;
             </div>
-            <a href="../auth/pageaccueil.html">Accueil</a>
-            <a href="../signalements/Liste.html">Signalements</a>
-            <a href="Liste.html" class="active">Interventions</a>
-            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
-        </div>
-    </nav>
 
-    <main class="dashboard-main">
+            &#x20;       <div class="page-head"><div><h1>Interventions</h1><p>Chantiers planifiés ou en cours, avec l'équipe et le tronçon associés.</p></div></div>
 
-        <div class="dashboard-header">
-            <div>
-                <a href="Liste.html" class="section-subtitle-link">← Retour à la liste</a>
-                <h1 style="margin-top:0.5rem;">Intervention — Axe Rond-Point Deido - Bonabéri</h1>
-                <p>Planifiée le 14/08/2026 · <span id="statutLabel">Planifié</span></p>
-            </div>
-        </div>
+            &#x20;       <section class="kpi-row">
 
-        <div class="dashboard-section">
-            <div class="detail-grid">
+                &#x20;           <div class="kpi"><span class="kpi-label">Planifiées</span><span class="kpi-num">7</span></div>
 
-                <div>
-                    <div class="detail-info-list">
-                        <div class="detail-info-row">
-                            <span class="label">Tronçon</span>
-                            <span class="value"><span id="tronconValue">Axe Rond-Point Deido - Bonabéri</span> — <a href="#" class="action-link" onclick="openEditModal(event)">Modifier</a></span>
-                        </div>
-                        <div class="detail-info-row">
-                            <span class="label">Équipe assignée</span>
-                            <span class="value"><span id="equipeValue">Équipe Bitumage Nord</span> — <a href="#" class="action-link" onclick="openEditModal(event)">Modifier</a></span>
-                        </div>
-                        <div class="detail-info-row">
-                            <span class="label">Signalement d'origine</span>
-                            <span class="value"><a href="../signalements/detail.html" class="action-link">Voir le signalement</a></span>
-                        </div>
-                        <div class="detail-info-row">
-                            <span class="label">Date planifiée</span>
-                            <span class="value">14/08/2026</span>
-                        </div>
-                    </div>
+                &#x20;           <div class="kpi"><span class="kpi-label">En cours</span><span class="kpi-num">12</span></div>
 
-                    <span class="report-section-label">Changer le statut</span>
-                    <div class="status-actions">
-                        <button type="button" class="btn-status is-current" id="btnPlanifie" onclick="setStatus('planifie', this)">Planifié</button>
-                        <button type="button" class="btn-status" id="btnEnCours" onclick="setStatus('encours', this)">Marquer en cours</button>
-                        <button type="button" class="btn-status" id="btnTermine" onclick="setStatus('termine', this)">Marquer terminé</button>
-                    </div>
+                &#x20;           <div class="kpi"><span class="kpi-label">Terminées</span><span class="kpi-num">76</span></div>
+
+                &#x20;           <div class="kpi"><span class="kpi-label">Coût du mois</span><span class="kpi-num">3,48<small>M</small></span></div>
+
+                &#x20;
+            </section>
+
+            &#x20;       <section class="card">
+
+                &#x20;           <div class="toolbar">
+
+                    &#x20;               <input type="text" placeholder="Rechercher par tronçon ou équipe...">
+
+                    &#x20;               <select><option>Tous les statuts</option><option>Planifié</option><option>En cours</option><option>Terminé</option></select>
+
+                    &#x20;
                 </div>
 
-                <div>
-                    <span class="report-section-label">Matériaux & Engins mobilisés</span>
-                    <div class="resource-list">
-                        <div class="resource-row">
-                            <span class="r-name">Bitume</span>
-                            <span class="r-detail">12 Tonnes</span>
-                        </div>
-                        <div class="resource-row">
-                            <span class="r-name">Compacteur CAT CB10</span>
-                            <span class="r-detail">6 heures</span>
-                        </div>
-                    </div>
+                &#x20;           <div class="table-scroll">
 
-                    <div class="cost-summary">
-                        <span class="label">Coût total estimé</span>
-                        <span class="value" id="coutTotal">228 000 FCFA</span>
-                    </div>
+                    &#x20;               <table class="data-table">
 
-                    <span class="report-section-label" style="display:block; margin-top:1.8rem;">Historique</span>
-                    <div class="history-timeline" id="historyTimeline">
-                        <div class="history-item">
-                            <div class="h-dot"></div>
-                            <div>
-                                <div class="h-text">Intervention créée, statut : Planifié</div>
-                                <div class="h-date">14/08/2026</div>
-                            </div>
-                        </div>
-                    </div>
+                        &#x20;
+                        <thead><tr><th>Tronçon</th><th>Équipe</th><th>Date planifiée</th><th>Coût estimé</th><th>Statut</th><th class="text-right">Action</th></tr></thead>
+
+                        &#x20;
+                        <tbody>
+
+                            &#x20;
+                            <tr><td class="strong">Axe Deido — Bonabéri</td><td>Équipe Bitumage Nord</td><td>14/08/2026</td><td>228 000 FCFA</td><td><span class="pill pill-progress">En cours</span></td><td class="text-right"><a class="action-link" href="detail.html">Voir</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Rue Njo-Njo, Akwa</td><td>Équipe Drainage</td><td>15/08/2026</td><td>145 000 FCFA</td><td><span class="pill pill-new">Planifié</span></td><td class="text-right"><a class="action-link" href="detail.html">Voir</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Rond-point Bepanda</td><td>Équipe Voirie Sud</td><td>16/08/2026</td><td>310 000 FCFA</td><td><span class="pill pill-new">Planifié</span></td><td class="text-right"><a class="action-link" href="detail.html">Voir</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Boulevard de la Liberté</td><td>Équipe Voirie Sud</td><td>05/08/2026</td><td>192 000 FCFA</td><td><span class="pill pill-done">Terminé</span></td><td class="text-right"><a class="action-link" href="detail.html">Voir</a></td></tr>
+
+                            &#x20;
+                        </tbody>
+
+                        &#x20;
+                    </table>
+
+                    &#x20;
                 </div>
 
-            </div>
-        </div>
+                &#x20;           <p class="note">Données d'exemple — seront remplacées par la base de données.</p>
 
-    </main>
+                &#x20;
+            </section>
 
-    <div class="dash-modal-overlay" id="editModal">
-        <div class="dash-modal-content">
-            <h3 style="margin-top:0; font-size:1.3rem; margin-bottom:1.2rem;">Modifier l'intervention</h3>
-            <form id="editForm" onsubmit="submitEdit(event)">
-                <div class="form-group">
-                    <label for="inputTroncon">Tronçon</label>
-                    <input type="text" id="inputTroncon" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputEquipe">Équipe assignée</label>
-                    <input type="text" id="inputEquipe" required>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-cancel" onclick="closeEditModal()">Annuler</button>
-                    <button type="submit" class="btn-submit">Enregistrer</button>
-                </div>
-            </form>
-        </div>
+            &#x20;
+        </main>
+
     </div>
 
-    <script src="detail.js"></script>
+    <script src="../js/menu.js"></script>
+
 </body>
+
+</html>
+
+```
+
+\---
+
+### **8. `wwwroot/Maquettes/interventions/detail.html`**
+
+```html
+
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    &#x20;
+    <meta charset="UTF-8">
+
+    &#x20;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    &#x20;
+    <title>Détail de l'intervention — Régie des Routes et Construction</title>
+
+    &#x20;
+    <link rel="stylesheet" href="../css/styles.css">
+
+</head>
+
+<body>
+
+    <div class="layout">
+
+        &#x20;   <aside class="sidebar">
+
+            &#x20;       <div class="brand"><div class="brand-mark">2RC</div><div class="brand-text"><strong>AnRen</strong><span>Régie des Routes et Construction</span></div></div>
+
+            &#x20;       <nav class="nav">
+
+                &#x20;           <p class="nav-label">Pilotage</p>
+
+                &#x20;           <a class="nav-link" href="../dashboard/dashboard.html">Tableau de bord</a>
+
+                &#x20;           <a class="nav-link" href="../signalements/Liste.html">Signalements</a>
+
+                &#x20;           <a class="nav-link active" href="Liste.html">Interventions</a>
+
+                &#x20;           <p class="nav-label">Référentiel</p>
+
+                &#x20;           <a class="nav-link" href="../administration/Troncons.html">Tronçons</a>
+
+                &#x20;           <a class="nav-link" href="../administration/Equipes.html">Équipes</a>
+
+                &#x20;           <a class="nav-link" href="../administration/References.html">Références</a>
+
+                &#x20;           <a class="nav-link" href="../administration/Releves.html">Relevés</a>
+
+                &#x20;
+            </nav>
+
+            &#x20;       <div class="sidebar-footer"><div class="user"><div class="user-avatar">DT</div><div class="user-meta"><strong>Darren Tchameni</strong><span>Administrateur</span></div></div><a class="logout" href="../auth/Login.html">Déconnexion</a></div>
+
+            &#x20;
+        </aside>
+
+        &#x20;   <div class="overlay" onclick="closeMenu()"></div>
+
+        &#x20;   <main class="main">
+
+            &#x20;       <div class="topbar">
+
+                &#x20;           <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+
+                &#x20;           <div class="breadcrumb">Interventions \&nbsp;\&rsaquo;\&nbsp; Détail</div>
+
+                &#x20;           <input type="text" class="search" placeholder="Rechercher...">
+
+                &#x20;
+            </div>
+
+            &#x20;       <div class="page-head">
+
+                &#x20;           <div>
+
+                    &#x20;               <a class="back-link" href="Liste.html">← Retour à la liste</a>
+
+                    &#x20;               <h1>Intervention — Axe Deido — Bonabéri</h1>
+
+                    &#x20;               <p>Planifiée le 14/08/2026 · Statut : En cours</p>
+
+                    &#x20;
+                </div>
+
+                &#x20;
+            </div>
+
+            &#x20;       <section class="card">
+
+                &#x20;           <div class="detail-grid">
+
+                    &#x20;               <div>
+
+                        &#x20;                   <div class="info-list">
+
+                            &#x20;                       <div class="info-row"><span class="label">Tronçon</span><span class="value">Axe Deido — Bonabéri</span></div>
+
+                            &#x20;                       <div class="info-row"><span class="label">Équipe assignée</span><span class="value">Équipe Bitumage Nord</span></div>
+
+                            &#x20;                       <div class="info-row"><span class="label">Signalement d'origine</span><span class="value"><a class="action-link" href="../signalements/detail.html">Voir le signalement</a></span></div>
+
+                            &#x20;                       <div class="info-row"><span class="label">Date planifiée</span><span class="value">14/08/2026</span></div>
+
+                            &#x20;
+                        </div>
+
+                        &#x20;                   <span class="section-label">Changer le statut</span>
+
+                        &#x20;                   <div class="status-actions">
+
+                            &#x20;                       <button class="btn-status">Planifié</button>
+
+                            &#x20;                       <button class="btn-status current">En cours</button>
+
+                            &#x20;                       <button class="btn-status">Terminé</button>
+
+                            &#x20;
+                        </div>
+
+                        &#x20;
+                    </div>
+
+                    &#x20;               <div>
+
+                        &#x20;                   <span class="section-label" style="margin-top:0;">Matériaux et engins mobilisés</span>
+
+                        &#x20;                   <div class="resource-row"><span class="r-name">Bitume</span><span class="r-detail">12 tonnes</span></div>
+
+                        &#x20;                   <div class="resource-row"><span class="r-name">Compacteur CAT CB10</span><span class="r-detail">6 heures</span></div>
+
+                        &#x20;                   <div class="cost-box"><span class="label">Coût total estimé</span><span class="value">228 000 FCFA</span></div>
+
+                        &#x20;                   <span class="section-label">Historique</span>
+
+                        &#x20;                   <div class="info-row"><span class="value">Intervention créée — Planifié</span><span class="label">14/08/2026</span></div>
+
+                        &#x20;                   <div class="info-row"><span class="value">Démarrage du chantier — En cours</span><span class="label">14/08/2026</span></div>
+
+                        &#x20;
+                    </div>
+
+                    &#x20;
+                </div>
+
+                &#x20;
+            </section>
+
+            &#x20;
+        </main>
+
+    </div>
+
+    <script src="../js/menu.js"></script>
+
+</body>
+
 </html>

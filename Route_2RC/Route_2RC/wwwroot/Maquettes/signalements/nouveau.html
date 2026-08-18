@@ -10,7 +10,7 @@
 
     <nav class="home-navbar">
         <div class="home-nav-brand">
-            <img src="../assets/cud-logo.png" alt="Logo CUD" onerror="this.style.display='none'">
+            
             <span>Régie des routes et construction</span>
         </div>
         <div class="home-nav-links">
@@ -25,7 +25,7 @@
 
             <form id="reportForm">
                 <a href="../auth/pageaccueil.html" style="color:var(--cyan-line); text-decoration:none; font-weight:600; font-size:0.85rem;">← Retour à l'accueil</a>
-                <h1>🚧 Signaler une dégradation</h1>
+                <h1>Signaler une dégradation</h1>
                 <p class="report-intro">Aucun compte n'est nécessaire. Quelques informations suffisent.</p>
 
                 <div class="report-section">
@@ -33,19 +33,19 @@
                     <div class="degradation-type-grid">
                         <div class="degradation-type-option">
                             <input type="radio" name="typeDegradation" id="typeNid" value="Nid-de-poule" required>
-                            <label for="typeNid"><span class="dt-icon">🕳️</span> Nid-de-poule</label>
+                            <label for="typeNid"><span class="dt-icon"></span> Nid-de-poule</label>
                         </div>
                         <div class="degradation-type-option">
                             <input type="radio" name="typeDegradation" id="typeChaussee" value="Chaussée dégradée">
-                            <label for="typeChaussee"><span class="dt-icon">🛣️</span> Chaussée dégradée</label>
+                            <label for="typeChaussee"><span class="dt-icon"></span> Chaussée dégradée</label>
                         </div>
                         <div class="degradation-type-option">
                             <input type="radio" name="typeDegradation" id="typeDrain" value="Drain obstrué">
-                            <label for="typeDrain"><span class="dt-icon">🚰</span> Drain obstrué</label>
+                            <label for="typeDrain"><span class="dt-icon"></span> Drain obstrué</label>
                         </div>
                         <div class="degradation-type-option">
                             <input type="radio" name="typeDegradation" id="typeAutre" value="Autre">
-                            <label for="typeAutre"><span class="dt-icon">⚠️</span> Autre</label>
+                            <label for="typeAutre"><span class="dt-icon"></span> Autre</label>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <span class="report-section-label">2. Localisation</span>
                     <div class="location-box">
                         <span class="location-status" id="locationStatus">Position non détectée</span>
-                        <button type="button" class="btn-locate" id="btnLocate" onclick="detectLocation()">📍 Localiser automatiquement</button>
+                        <button type="button" class="btn-locate" id="btnLocate" onclick="detectLocation()"> Localiser automatiquement</button>
                     </div>
                     <input type="hidden" id="latitude" name="latitude">
                     <input type="hidden" id="longitude" name="longitude">
@@ -64,7 +64,7 @@
                     <span class="report-section-label">3. Photo</span>
                     <div class="photo-drop" id="photoDrop">
                         <input type="file" id="photoInput" accept="image/*" capture="environment">
-                        <span class="photo-drop-text">📷 Prendre une photo ou en choisir une</span>
+                        <span class="photo-drop-text"> Prendre une photo ou en choisir une</span>
                     </div>
                     <img id="photoPreview" class="photo-preview" alt="Aperçu de la photo">
                 </div>
@@ -78,7 +78,7 @@
             </form>
 
             <div class="report-confirmation" id="reportConfirmation">
-                <div class="rc-icon">✅</div>
+                <div class="rc-icon"></div>
                 <h2>Merci pour votre signalement !</h2>
                 <p>Il a été transmis à la Régie des routes et construction. L'équipe des Études l'analysera pour planifier une intervention.</p>
                 <a href="../auth/pageaccueil.html" class="btn-hero-signal btn-hero-primary">Retour à l'accueil</a>

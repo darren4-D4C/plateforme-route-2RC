@@ -1,104 +1,176 @@
 ﻿<!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
+
+    &#x20;
     <meta charset="UTF-8">
+
+    &#x20;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relevés Terrain - Régie des routes et construction</title>
+
+    &#x20;
+    <title>Relevés terrain — Régie des Routes et Construction</title>
+
+    &#x20;
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
-<body class="dash-page">
 
-    <nav class="dash-navbar">
-        <div class="dash-nav-brand">
-            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
-            <span>Régie des routes et construction</span>
-        </div>
-        <div class="dash-nav-links">
-            <div class="nav-user-profile">
-                <div class="user-avatar-badge">EX</div>
-                <div class="user-profile-info">
-                    <span class="user-profile-name">Expert Terrain</span>
-                    <span class="user-profile-role">Études & Contrôle</span>
+<body>
+
+    <div class="layout">
+
+        &#x20;   <aside class="sidebar">
+
+            &#x20;       <div class="brand"><div class="brand-mark">2RC</div><div class="brand-text"><strong>AnRen</strong><span>Régie des Routes et Construction</span></div></div>
+
+            &#x20;       <nav class="nav">
+
+                &#x20;           <p class="nav-label">Pilotage</p>
+
+                &#x20;           <a class="nav-link" href="../dashboard/dashboard.html">Tableau de bord</a>
+
+                &#x20;           <a class="nav-link" href="../signalements/Liste.html">Signalements</a>
+
+                &#x20;           <a class="nav-link" href="../interventions/Liste.html">Interventions</a>
+
+                &#x20;           <p class="nav-label">Référentiel</p>
+
+                &#x20;           <a class="nav-link" href="Troncons.html">Tronçons</a>
+
+                &#x20;           <a class="nav-link" href="Equipes.html">Équipes</a>
+
+                &#x20;           <a class="nav-link" href="References.html">Références</a>
+
+                &#x20;           <a class="nav-link active" href="Releves.html">Relevés</a>
+
+                &#x20;
+            </nav>
+
+            &#x20;       <div class="sidebar-footer"><div class="user"><div class="user-avatar">DT</div><div class="user-meta"><strong>Darren Tchameni</strong><span>Administrateur</span></div></div><a class="logout" href="../auth/Login.html">Déconnexion</a></div>
+
+            &#x20;
+        </aside>
+
+        &#x20;   <div class="overlay" onclick="closeMenu()"></div>
+
+        &#x20;   <main class="main">
+
+            &#x20;       <div class="topbar">
+
+                &#x20;           <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+
+                &#x20;           <div class="breadcrumb">Référentiel \&nbsp;\&rsaquo;\&nbsp; Relevés</div>
+
+                &#x20;           <input type="text" class="search" placeholder="Rechercher...">
+
+                &#x20;
+            </div>
+
+            &#x20;       <div class="page-head"><div><h1>Relevés terrain</h1><p>Saisie des relevés topographiques et pluviométriques par les experts.</p></div></div>
+
+
+
+            &#x20;       <div class="two-col">
+
+                &#x20;           <section class="card form-card">
+
+                    &#x20;               <div class="card-head"><h2>Nouveau relevé</h2></div>
+
+                    &#x20;               <form onsubmit="addRow(event, 'tableReleves', '')">
+
+                        &#x20;                   <div class="form-group"><label>Type de relevé</label><select><option>Pluviométrie</option><option>Topographie</option></select></div>
+
+                        &#x20;                   <div class="form-group"><label>Tronçon concerné</label><input type="text" placeholder="Ex : Axe Deido — Bonabéri" required></div>
+
+                        &#x20;                   <div class="form-group"><label>Valeur</label><input type="text" placeholder="Ex : 42,5 mm ou Marécageux" required></div>
+
+                        &#x20;                   <div class="form-group"><label>Date du relevé</label><input type="date" required></div>
+
+                        &#x20;                   <button type="submit" class="btn-primary">Enregistrer le relevé</button>
+
+                        &#x20;
+                    </form>
+
+                    &#x20;
+                </section>
+
+                &#x20;           <section class="card">
+
+                    &#x20;               <div class="card-head"><h2>Résumé</h2></div>
+
+                    &#x20;               <div class="stat-bars">
+
+                        &#x20;                   <div class="sbar"><div class="sbar-top"><span>Relevés pluviométriques</span><span>26</span></div><div class="sbar-track"><div class="sbar-fill f-progress" style="width:63%"></div></div></div>
+
+                        &#x20;                   <div class="sbar"><div class="sbar-top"><span>Relevés topographiques</span><span>15</span></div><div class="sbar-track"><div class="sbar-fill f-navy" style="width:37%"></div></div></div>
+
+                        &#x20;
+                    </div>
+
+                    &#x20;               <div class="mini-row">
+
+                        &#x20;                   <div class="mini"><span class="mini-label">Total relevés</span><span class="mini-val">41</span></div>
+
+                        &#x20;                   <div class="mini"><span class="mini-label">Ce mois</span><span class="mini-val">9</span></div>
+
+                        &#x20;
+                    </div>
+
+                    &#x20;
+                </section>
+
+                &#x20;
+            </div>
+
+
+
+            &#x20;       <section class="card">
+
+                &#x20;           <div class="card-head"><h2>Relevés enregistrés</h2></div>
+
+                &#x20;           <div class="table-scroll">
+
+                    &#x20;               <table class="data-table" id="tableReleves">
+
+                        &#x20;
+                        <thead><tr><th>Type</th><th>Tronçon</th><th>Valeur</th><th>Date</th><th class="text-right">Action</th></tr></thead>
+
+                        &#x20;
+                        <tbody>
+
+                            &#x20;
+                            <tr><td class="strong">Pluviométrie</td><td>Axe Deido — Bonabéri</td><td>42,5 mm</td><td>2026-08-12</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Topographie</td><td>Rue Njo-Njo, Akwa</td><td>Marécageux</td><td>2026-08-11</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Pluviométrie</td><td>Rond-point Bepanda</td><td>18,0 mm</td><td>2026-08-10</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                        </tbody>
+
+                        &#x20;
+                    </table>
+
+                    &#x20;
                 </div>
-            </div>
-            <a href="../auth/pageaccueil.html">Accueil</a>
-            <a href="Releves.html" class="active">Nouveau relevé</a>
-            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
-        </div>
-    </nav>
 
-    <main class="dashboard-main">
+                &#x20;           <p class="note">Données d'exemple — seront remplacées par la base de données.</p>
 
-        <div class="dashboard-header">
-            <div>
-                <h1>Relevés Terrain</h1>
-                <p>Saisie rapide d'un relevé topographique ou d'une donnée de pluviométrie.</p>
-            </div>
-        </div>
+                &#x20;
+            </section>
 
-        <div class="dashboard-section field-form-card">
-            <div class="tab-nav">
-                <button type="button" class="tab-btn is-active" data-tab="topo" onclick="switchTab('topo')">Relevé topographique</button>
-                <button type="button" class="tab-btn" data-tab="pluvio" onclick="switchTab('pluvio')">Donnée pluviométrique</button>
-            </div>
+            &#x20;
+        </main>
 
-            <!-- Relevé topographique -->
-            <div class="tab-panel is-active" id="panel-topo">
-                <form id="topoForm" onsubmit="submitTopo(event)">
-                    <div class="form-group">
-                        <label for="topoTroncon">Tronçon concerné</label>
-                        <input type="text" id="topoTroncon" placeholder="Ex: Axe Rond-Point Deido - Bonabéri" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="topoRelief">Type de relief</label>
-                        <div class="custom-select-wrapper">
-                            <select id="topoRelief" required>
-                                <option value="Plat">Plat</option>
-                                <option value="Vallonné">Vallonné</option>
-                                <option value="Marécageux">Marécageux</option>
-                                <option value="Montagneux">Montagneux</option>
-                            </select>
-                            <i class="fa-solid fa-chevron-down select-arrow"></i>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="topoDate">Date du relevé</label>
-                        <input type="date" id="topoDate" required>
-                    </div>
-                    <button type="submit" class="btn-submit-custom">Enregistrer le relevé</button>
-                </form>
-            </div>
+    </div>
 
-            <!-- Donnée pluviométrique -->
-            <div class="tab-panel" id="panel-pluvio">
-                <form id="pluvioForm" onsubmit="submitPluvio(event)">
-                    <div class="form-group">
-                        <label for="pluvioTroncon">Tronçon concerné</label>
-                        <input type="text" id="pluvioTroncon" placeholder="Ex: Axe Rond-Point Deido - Bonabéri" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pluvioNiveau">Niveau de pluie (mm)</label>
-                        <input type="number" id="pluvioNiveau" min="0" step="0.1" placeholder="Ex: 42.5" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pluvioDate">Date du relevé</label>
-                        <input type="date" id="pluvioDate" required>
-                    </div>
-                    <button type="submit" class="btn-submit-custom">Enregistrer la donnée</button>
-                </form>
-            </div>
+    <script src="../js/menu.js"></script>
 
-            <div class="report-confirmation" id="fieldConfirmation">
-                <div class="rc-icon">✅</div>
-                <h2>Relevé enregistré</h2>
-                <p>Il sera transmis au Chef Études & Contrôle pour la priorisation des chantiers.</p>
-                <button type="button" class="btn-hero-signal btn-hero-primary" onclick="resetConfirmation()">Saisir un autre relevé</button>
-            </div>
-        </div>
-
-    </main>
-
-    <script src="releves.js"></script>
 </body>
+
 </html>

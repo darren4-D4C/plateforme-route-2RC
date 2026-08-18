@@ -1,100 +1,146 @@
 ﻿<!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
+
+    &#x20;
     <meta charset="UTF-8">
+
+    &#x20;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signalements - Régie des routes et construction</title>
+
+    &#x20;
+    <title>Signalements — Régie des Routes et Construction</title>
+
+    &#x20;
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
-<body class="dash-page">
 
-    <nav class="dash-navbar">
-        <div class="dash-nav-brand">
-            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
-            <span>Régie des routes et construction</span>
-        </div>
-        <div class="dash-nav-links">
-            <div class="nav-user-profile">
-                <div class="user-avatar-badge">DT</div>
-                <div class="user-profile-info">
-                    <span class="user-profile-name">Darren Tchameni</span>
-                    <span class="user-profile-role">Super Admin</span>
+<body>
+
+    <div class="layout">
+
+        &#x20;   <aside class="sidebar">
+
+            &#x20;       <div class="brand"><div class="brand-mark">2RC</div><div class="brand-text"><strong>AnRen</strong><span>Régie des Routes et Construction</span></div></div>
+
+            &#x20;       <nav class="nav">
+
+                &#x20;           <p class="nav-label">Pilotage</p>
+
+                &#x20;           <a class="nav-link" href="../dashboard/dashboard.html">Tableau de bord</a>
+
+                &#x20;           <a class="nav-link active" href="Liste.html">Signalements</a>
+
+                &#x20;           <a class="nav-link" href="../interventions/Liste.html">Interventions</a>
+
+                &#x20;           <p class="nav-label">Référentiel</p>
+
+                &#x20;           <a class="nav-link" href="../administration/Troncons.html">Tronçons</a>
+
+                &#x20;           <a class="nav-link" href="../administration/Equipes.html">Équipes</a>
+
+                &#x20;           <a class="nav-link" href="../administration/References.html">Références</a>
+
+                &#x20;           <a class="nav-link" href="../administration/Releves.html">Relevés</a>
+
+                &#x20;
+            </nav>
+
+            &#x20;       <div class="sidebar-footer"><div class="user"><div class="user-avatar">DT</div><div class="user-meta"><strong>Darren Tchameni</strong><span>Administrateur</span></div></div><a class="logout" href="../auth/Login.html">Déconnexion</a></div>
+
+            &#x20;
+        </aside>
+
+        &#x20;   <div class="overlay" onclick="closeMenu()"></div>
+
+        &#x20;   <main class="main">
+
+            &#x20;       <div class="topbar">
+
+                &#x20;           <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+
+                &#x20;           <div class="breadcrumb">Pilotage \&nbsp;\&rsaquo;\&nbsp; Signalements</div>
+
+                &#x20;           <input type="text" class="search" placeholder="Rechercher...">
+
+                &#x20;
+            </div>
+
+            &#x20;       <div class="page-head"><div><h1>Signalements</h1><p>Dégradations remontées par les citoyens, à analyser et prioriser.</p></div></div>
+
+            &#x20;       <section class="kpi-row">
+
+                &#x20;           <div class="kpi"><span class="kpi-label">Reçus</span><span class="kpi-num">128</span></div>
+
+                &#x20;           <div class="kpi"><span class="kpi-label">Nouveaux</span><span class="kpi-num">34</span></div>
+
+                &#x20;           <div class="kpi"><span class="kpi-label">En cours</span><span class="kpi-num">18</span></div>
+
+                &#x20;           <div class="kpi"><span class="kpi-label">Traités</span><span class="kpi-num">62</span></div>
+
+                &#x20;
+            </section>
+
+            &#x20;       <section class="card">
+
+                &#x20;           <div class="toolbar">
+
+                    &#x20;               <input type="text" placeholder="Rechercher par type ou localisation...">
+
+                    &#x20;               <select><option>Tous les statuts</option><option>Nouveau</option><option>En cours</option><option>Traité</option><option>Rejeté</option></select>
+
+                    &#x20;
                 </div>
-            </div>
-            <a href="../auth/pageaccueil.html">Accueil</a>
-            <a href="../dashboard/dashboard.html">Super Admin</a>
-            <a href="Liste.html" class="active">Signalements</a>
-            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
-        </div>
-    </nav>
 
-    <main class="dashboard-main">
+                &#x20;           <div class="table-scroll">
 
-        <div class="dashboard-header">
-            <div>
-                <h1>Signalements</h1>
-                <p>Dégradations remontées par les citoyens, en attente d'analyse et de priorisation.</p>
-            </div>
-        </div>
+                    &#x20;               <table class="data-table">
 
-        <div class="dashboard-kpis">
-            <div class="kpi-card">
-                <div class="kpi-icon">📋</div>
-                <h3>Signalements reçus</h3>
-                <p class="kpi-value cyan" id="kpiTotal">0</p>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon">⏳</div>
-                <h3>En attente de traitement</h3>
-                <p class="kpi-value gold" id="kpiPending">0</p>
-            </div>
-        </div>
+                        &#x20;
+                        <thead><tr><th>Type</th><th>Localisation</th><th>Date</th><th>Priorité</th><th>Statut</th><th class="text-right">Action</th></tr></thead>
 
-        <div class="dashboard-section">
-            <div class="section-header">
-                <h2>Liste des signalements</h2>
-                <span>Le score de priorité sera calculé automatiquement par le backend</span>
-            </div>
+                        &#x20;
+                        <tbody>
 
-            <div class="list-toolbar">
-                <div class="search-input-wrapper">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" placeholder="Rechercher par type ou localisation..." onkeyup="filterSignalements()">
+                            &#x20;
+                            <tr><td class="strong">Nid-de-poule</td><td>Axe Deido — Bonabéri</td><td>12/08/2026</td><td><span class="prio prio-high">Élevée</span></td><td><span class="pill pill-new">Nouveau</span></td><td class="text-right"><a class="action-link" href="detail.html">Voir</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Chaussée dégradée</td><td>Rond-point Bepanda</td><td>11/08/2026</td><td><span class="prio prio-mid">Moyenne</span></td><td><span class="pill pill-progress">En cours</span></td><td class="text-right"><a class="action-link" href="detail.html">Voir</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Drain obstrué</td><td>Rue Njo-Njo, Akwa</td><td>10/08/2026</td><td><span class="prio prio-high">Élevée</span></td><td><span class="pill pill-new">Nouveau</span></td><td class="text-right"><a class="action-link" href="detail.html">Voir</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Nid-de-poule</td><td>Boulevard de la Liberté</td><td>09/08/2026</td><td><span class="prio prio-low">Faible</span></td><td><span class="pill pill-done">Traité</span></td><td class="text-right"><a class="action-link" href="detail.html">Voir</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Chaussée dégradée</td><td>Carrefour Ndokoti</td><td>08/08/2026</td><td><span class="prio prio-mid">Moyenne</span></td><td><span class="pill pill-reject">Rejeté</span></td><td class="text-right"><a class="action-link" href="detail.html">Voir</a></td></tr>
+
+                            &#x20;
+                        </tbody>
+
+                        &#x20;
+                    </table>
+
+                    &#x20;
                 </div>
-                <div class="select-with-icon">
-                    <select id="statutFilter" onchange="filterSignalements()">
-                        <option value="all">Tous les statuts</option>
-                        <option value="nouveau">Nouveau</option>
-                        <option value="encours">En cours</option>
-                        <option value="traite">Traité</option>
-                        <option value="rejete">Rejeté</option>
-                    </select>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </div>
-            </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th onclick="sortBy(0)" style="cursor:pointer;">TYPE ⇅</th>
-                        <th onclick="sortBy(1)" style="cursor:pointer;">LOCALISATION ⇅</th>
-                        <th onclick="sortBy(2)" style="cursor:pointer;">DATE ⇅</th>
-                        <th>STATUT</th>
-                        <th class="text-right">ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBodyContent">
-                    <!-- Rempli par le backend (SignalementController) une fois branché. Vide par défaut. -->
-                </tbody>
-            </table>
-            <p id="emptyStateMsg" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">
-                Aucun signalement pour le moment. Les signalements citoyens apparaîtront ici automatiquement une fois le backend connecté.
-            </p>
-        </div>
+                &#x20;           <p class="note">Données d'exemple — seront remplacées par la base de données.</p>
 
-    </main>
+                &#x20;
+            </section>
 
-    <script src="liste.js"></script>
+            &#x20;
+        </main>
+
+    </div>
+
+    <script src="../js/menu.js"></script>
+
 </body>
+
 </html>

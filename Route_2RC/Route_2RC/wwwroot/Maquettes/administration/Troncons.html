@@ -1,109 +1,173 @@
 ﻿<!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
+
+    &#x20;
     <meta charset="UTF-8">
+
+    &#x20;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tronçons - Régie des routes et construction</title>
+
+    &#x20;
+    <title>Tronçons — Régie des Routes et Construction</title>
+
+    &#x20;
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
-<body class="dash-page">
 
-    <nav class="dash-navbar">
-        <div class="dash-nav-brand">
-            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
-            <span>Régie des routes et construction</span>
-        </div>
-        <div class="dash-nav-links">
-            <div class="nav-user-profile">
-                <div class="user-avatar-badge">DT</div>
-                <div class="user-profile-info">
-                    <span class="user-profile-name">Darren Tchameni</span>
-                    <span class="user-profile-role">Super Admin</span>
-                </div>
+<body>
+
+    <div class="layout">
+
+        &#x20;   <aside class="sidebar">
+
+            &#x20;       <div class="brand"><div class="brand-mark">2RC</div><div class="brand-text"><strong>AnRen</strong><span>Régie des Routes et Construction</span></div></div>
+
+            &#x20;       <nav class="nav">
+
+                &#x20;           <p class="nav-label">Pilotage</p>
+
+                &#x20;           <a class="nav-link" href="../dashboard/dashboard.html">Tableau de bord</a>
+
+                &#x20;           <a class="nav-link" href="../signalements/Liste.html">Signalements</a>
+
+                &#x20;           <a class="nav-link" href="../interventions/Liste.html">Interventions</a>
+
+                &#x20;           <p class="nav-label">Référentiel</p>
+
+                &#x20;           <a class="nav-link active" href="Troncons.html">Tronçons</a>
+
+                &#x20;           <a class="nav-link" href="Equipes.html">Équipes</a>
+
+                &#x20;           <a class="nav-link" href="References.html">Références</a>
+
+                &#x20;           <a class="nav-link" href="Releves.html">Relevés</a>
+
+                &#x20;
+            </nav>
+
+            &#x20;       <div class="sidebar-footer"><div class="user"><div class="user-avatar">DT</div><div class="user-meta"><strong>Darren Tchameni</strong><span>Administrateur</span></div></div><a class="logout" href="../auth/Login.html">Déconnexion</a></div>
+
+            &#x20;
+        </aside>
+
+        &#x20;   <div class="overlay" onclick="closeMenu()"></div>
+
+        &#x20;   <main class="main">
+
+            &#x20;       <div class="topbar">
+
+                &#x20;           <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+
+                &#x20;           <div class="breadcrumb">Référentiel \&nbsp;\&rsaquo;\&nbsp; Tronçons</div>
+
+                &#x20;           <input type="text" class="search" placeholder="Rechercher...">
+
+                &#x20;
             </div>
-            <a href="../auth/pageaccueil.html">Accueil</a>
-            <a href="../dashboard/dashboard.html">Super Admin</a>
-            <a href="Equipes.html">Équipes</a>
-            <a href="Troncons.html" class="active">Tronçons</a>
-            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
-        </div>
-    </nav>
 
-    <main class="dashboard-main">
+            &#x20;       <div class="page-head">
 
-        <div class="dashboard-header">
-            <div>
-                <h1>Tronçons</h1>
-                <p>Segments de route répertoriés, utilisés pour rattacher signalements et relevés.</p>
-            </div>
-            <button type="button" onclick="openModal()" class="btn-primary">+ Nouveau Tronçon</button>
-        </div>
+                &#x20;           <div><h1>Tronçons</h1><p>Segments de route, utilisés pour rattacher signalements et relevés.</p></div>
 
-        <div class="dashboard-kpis">
-            <div class="kpi-card">
-                <div class="kpi-icon">🛣️</div>
-                <h3>Tronçons enregistrés</h3>
-                <p class="kpi-value cyan" id="kpiCount">0</p>
-            </div>
-        </div>
+                &#x20;           <button class="btn-primary" onclick="openModal('modalTroncon')">+ Nouveau tronçon</button>
 
-        <div class="dashboard-section">
-            <div class="section-header">
-                <h2>Liste des tronçons</h2>
-                <span>Sert de référence pour les signalements et les relevés terrain</span>
+                &#x20;
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>NOM TRONÇON</th>
-                        <th>QUARTIER</th>
-                        <th>TOPOGRAPHIE</th>
-                        <th class="text-right">ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBodyContent"></tbody>
-            </table>
-            <p id="emptyStateMsg" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">
-                Aucun tronçon enregistré pour le moment.
-            </p>
-        </div>
+            &#x20;       <section class="kpi-row">
 
-    </main>
+                &#x20;           <div class="kpi"><span class="kpi-label">Tronçons</span><span class="kpi-num">24</span></div>
 
-    <div class="dash-modal-overlay" id="newModal">
-        <div class="dash-modal-content">
-            <h3 style="margin-top:0; color:var(--text-main); font-size:1.3rem; margin-bottom:1.2rem;">Nouveau Tronçon</h3>
-            <form id="newForm" onsubmit="submitNew(event)">
-                <div class="form-group">
-                    <label for="inputNom">Nom du tronçon</label>
-                    <input type="text" id="inputNom" placeholder="Ex: Axe Rond-Point Deido - Bonabéri" required>
+                &#x20;           <div class="kpi"><span class="kpi-label">Quartiers couverts</span><span class="kpi-num">9</span></div>
+
+                &#x20;           <div class="kpi"><span class="kpi-label">Signalements liés</span><span class="kpi-num">128</span></div>
+
+                &#x20;           <div class="kpi"><span class="kpi-label">Relevés enregistrés</span><span class="kpi-num">41</span></div>
+
+                &#x20;
+            </section>
+
+            &#x20;       <section class="card">
+
+                &#x20;           <div class="card-head"><h2>Liste des tronçons</h2></div>
+
+                &#x20;           <div class="table-scroll">
+
+                    &#x20;               <table class="data-table" id="tableTroncons">
+
+                        &#x20;
+                        <thead><tr><th>Nom du tronçon</th><th>Quartier</th><th>Topographie</th><th class="text-right">Action</th></tr></thead>
+
+                        &#x20;
+                        <tbody>
+
+                            &#x20;
+                            <tr><td class="strong">Axe Deido — Bonabéri</td><td>Deido</td><td>Vallonné</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Rue Njo-Njo</td><td>Akwa</td><td>Marécageux</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                            <tr><td class="strong">Rond-point Bepanda</td><td>Bepanda</td><td>Plat</td><td class="text-right"><a href="#" class="action-delete" onclick="removeRow(event, this)">Supprimer</a></td></tr>
+
+                            &#x20;
+                        </tbody>
+
+                        &#x20;
+                    </table>
+
+                    &#x20;
                 </div>
-                <div class="form-group">
-                    <label for="inputQuartier">Quartier</label>
-                    <input type="text" id="inputQuartier" placeholder="Ex: Deido" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputTopo">Topographie</label>
-                    <div class="custom-select-wrapper">
-                        <select id="inputTopo" required>
-                            <option value="Plat">Plat</option>
-                            <option value="Vallonné">Vallonné</option>
-                            <option value="Marécageux">Marécageux</option>
-                            <option value="Montagneux">Montagneux</option>
-                        </select>
-                        <i class="fa-solid fa-chevron-down select-arrow"></i>
-                    </div>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-cancel" onclick="closeModal()">Annuler</button>
-                    <button type="submit" class="btn-submit">Créer le tronçon</button>
-                </div>
-            </form>
-        </div>
+
+                &#x20;           <p class="note">Données d'exemple — seront remplacées par la base de données.</p>
+
+                &#x20;
+            </section>
+
+            &#x20;
+        </main>
+
     </div>
 
-    <script src="troncons.js"></script>
+
+
+    <div class="modal-overlay" id="modalTroncon">
+
+        &#x20;   <div class="modal">
+
+            &#x20;       <h3>Nouveau tronçon</h3>
+
+            &#x20;       <form onsubmit="addRow(event, 'tableTroncons', 'modalTroncon')">
+
+                &#x20;           <div class="form-group"><label>Nom du tronçon</label><input type="text" placeholder="Ex : Axe Rond-Point Deido — Bonabéri" required></div>
+
+                &#x20;           <div class="form-group"><label>Quartier</label><input type="text" placeholder="Ex : Deido" required></div>
+
+                &#x20;           <div class="form-group"><label>Topographie</label><select><option>Plat</option><option>Vallonné</option><option>Marécageux</option><option>Montagneux</option></select></div>
+
+                &#x20;           <div class="modal-actions">
+
+                    &#x20;               <button type="button" class="btn-cancel" onclick="closeModal('modalTroncon')">Annuler</button>
+
+                    &#x20;               <button type="submit" class="btn-primary">Créer le tronçon</button>
+
+                    &#x20;
+                </div>
+
+                &#x20;
+            </form>
+
+            &#x20;
+        </div>
+
+    </div>
+
+    <script src="../js/menu.js"></script>
+
 </body>
+
 </html>
