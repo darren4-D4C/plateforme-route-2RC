@@ -1,9 +1,4 @@
-﻿/* ==========================================================================
-   AnRen — Feuille de style unique pour toutes les pages
-   Palette : navy (marque), or (accent), neutre (statuts) — pas d'autre teinte
-   ========================================================================== */
-
-:root {
+﻿:root {
     --navy: #0f2c4d;
     --navy-2: #16375c;
     --navy-hover: #1c4270;
@@ -1071,9 +1066,7 @@ a {
     max-width: 520px;
 }
 
-/* ==========================================================================
-   Pages publiques : connexion, accueil, signalement citoyen
-   ========================================================================== */
+/* Pages publiques : connexion, accueil, signalement citoyen */
 
 .login-page-container, .home-page {
     min-height: 100vh;
