@@ -3,156 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chef Opérations - Régie des routes et construction</title>
+    <title>Opérations — Régie des Routes et Construction</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dash-page">
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="brand"><div class="brand-mark">2RC</div><div class="brand-text"><strong>AnRen</strong><span>Régie des Routes et Construction</span></div></div>
+            <nav class="nav">
+                <p class="nav-label">Pilotage</p>
+                <a class="nav-link active" href="operations.html">Tableau de bord</a>
+                <a class="nav-link" href="../signalements/Liste.html">Signalements</a>
+                <a class="nav-link" href="../interventions/Liste.html">Interventions</a>
+                <a class="nav-link" href="../administration/Equipes.html">Équipes</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user" onclick="openModal('modalProfil')"><div class="user-avatar">CO</div><div class="user-meta"><strong>Chef Opérations</strong><span>Opérations</span></div></div>
+                <a class="logout" href="../auth/pageaccueil.html">Déconnexion</a>
+            </div>
+        </aside>
+        <div class="overlay" onclick="closeMenu()"></div>
+        <main class="main">
+            <div class="topbar">
+                <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+                <div class="breadcrumb">Opérations &rsaquo; Tableau de bord</div>
+                <input type="text" class="search" placeholder="Rechercher...">
+            </div>
+            <div class="page-head"><div><h1>Tableau de bord — Opérations</h1><p>Suivi des chantiers et gestion des équipes sur le terrain.</p></div></div>
 
-    <nav class="dash-navbar">
-        <div class="dash-nav-brand">
-            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
-            <span>Régie des routes et construction</span>
-        </div>
-        <div class="dash-nav-links">
-            <div class="nav-user-profile" onclick="openProfileModal()">
-                <div class="user-avatar-badge">CO</div>
-                <div class="user-profile-info">
-                    <span class="user-profile-name">Chef Opérations</span>
-                    <span class="user-profile-role">Opérations</span>
+            <section class="kpi-row kpi-row-2">
+                <div class="kpi"><span class="kpi-label"><span class="icon icon-report"></span> Chantiers actifs</span><span class="kpi-num" id="kpiActive">0</span></div>
+                <div class="kpi"><span class="kpi-label"><span class="icon icon-team"></span> Équipes mobilisées</span><span class="kpi-num" id="kpiTeams">0</span></div>
+            </section>
+
+            <section class="card">
+                <div class="card-head"><h2>Chantiers en cours</h2><a href="../interventions/Liste.html" class="card-link">Voir toutes les interventions →</a></div>
+                <p class="note">La liste complète, avec recherche et filtre par statut, est disponible sur la page Interventions.</p>
+            </section>
+
+            <section class="card">
+                <div class="card-head"><h2>Mon équipe</h2><button type="button" class="btn-primary" onclick="openModal('modalMembre')">+ Nouveau membre</button></div>
+                <div class="table-scroll">
+                    <table class="data-table" id="tableEquipeOperations">
+                        <thead><tr><th>Nom &amp; Prénom</th><th>Rôle</th><th>Email</th><th>Statut</th><th class="text-right">Actions</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
-            </div>
-            <a href="../auth/pageaccueil.html">Accueil</a>
-            <a href="operations.html" class="active">Tableau de Bord</a>
-            <a href="../signalements/Liste.html">Signalements</a>
-            <a href="../interventions/Liste.html">Interventions</a>
-            <a href="../administration/Equipes.html">Équipes</a>
-            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
-        </div>
-    </nav>
+                <p class="note" id="emptyStateMsg">Aucun membre d'équipe enregistré pour le moment.</p>
+            </section>
+        </main>
+    </div>
 
-    <main class="dashboard-main">
-
-        <div class="dashboard-header">
-            <div>
-                <h1>Tableau de Bord - Opérations</h1>
-                <p>Suivi des chantiers et gestion des équipes sur le terrain.</p>
-            </div>
-        </div>
-
-        <div class="dashboard-kpis">
-            <div class="kpi-card">
-                <div class="kpi-icon">🚧</div>
-                <h3>Chantiers actifs</h3>
-                <p class="kpi-value cyan" id="kpiActive">0</p>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon">👷</div>
-                <h3>Équipes mobilisées</h3>
-                <p class="kpi-value gold" id="kpiTeams">0</p>
-            </div>
-        </div>
-
-        <div class="dashboard-section">
-            <div class="section-header">
-                <h2>Chantiers en cours</h2>
-                <a href="../interventions/Liste.html" class="section-subtitle-link">Voir toutes les interventions →</a>
-            </div>
-            <p style="color:var(--text-muted); font-size:0.9rem;">
-                La liste complète, avec recherche et filtre par statut, est disponible sur la page Interventions.
-            </p>
-        </div>
-
-        <div class="dashboard-section">
-            <div class="section-header">
-                <h2>Mon équipe</h2>
-                <button type="button" class="btn-primary" onclick="openModal()">+ Nouveau Membre</button>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>NOM & PRÉNOM</th>
-                        <th>RÔLE</th>
-                        <th>EMAIL</th>
-                        <th>STATUT</th>
-                        <th class="text-right">ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBodyContent"></tbody>
-            </table>
-            <p id="emptyStateMsg" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">
-                Aucun membre d'équipe enregistré pour le moment.
-            </p>
-        </div>
-
-    </main>
-
-    <div class="dash-modal-overlay" id="profileModal">
-        <div class="dash-modal-content" style="text-align: left; width: 420px;">
-            <div style="display:flex; align-items:center; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
-                <div style="width: 56px; height: 56px; background: #0284c7; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold;">CO</div>
-                <div>
-                    <h3 style="margin: 0; color: var(--text-main); font-size: 1.1rem;">Chef Opérations</h3>
-                    <span style="color: var(--cyan-line); font-size: 0.85rem; font-weight: 600;">Opérations</span>
-                </div>
-            </div>
-            <form onsubmit="submitPasswordChange(event)">
-                <div class="form-group">
-                    <label for="currentPassword">Mot de passe actuel</label>
-                    <input type="password" id="currentPassword" placeholder="••••••••" required>
-                </div>
-                <div class="form-group">
-                    <label for="newPassword">Nouveau mot de passe</label>
-                    <input type="password" id="newPassword" placeholder="••••••••" required>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-cancel" onclick="closeProfileModal()">Fermer</button>
-                    <button type="submit" class="btn-submit">Changer le mot de passe</button>
+    <div class="modal-overlay" id="modalProfil">
+        <div class="modal">
+            <h3>Chef Opérations</h3>
+            <p class="note" style="margin-top:-0.6rem; margin-bottom:1rem;">Opérations</p>
+            <form onsubmit="event.preventDefault(); closeModal('modalProfil')">
+                <div class="form-group"><label>Mot de passe actuel</label><input type="password" placeholder="••••••••" required></div>
+                <div class="form-group"><label>Nouveau mot de passe</label><input type="password" placeholder="••••••••" required></div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal('modalProfil')">Fermer</button>
+                    <button type="submit" class="btn-primary">Changer le mot de passe</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="dash-modal-overlay" id="newModal">
-        <div class="dash-modal-content">
-            <h3 style="margin-top:0; font-size:1.3rem; margin-bottom:1.2rem;">Nouveau Membre d'Équipe</h3>
-            <p style="margin-top:-0.8rem; margin-bottom:1.2rem; font-size:0.85rem; color:var(--text-muted);">
-                La personne choisit son mot de passe. Un identifiant sera généré et envoyé par email.
-            </p>
-            <form id="newForm" onsubmit="submitNew(event)">
-                <div class="form-group">
-                    <label for="inputNom">Nom complet</label>
-                    <input type="text" id="inputNom" placeholder="Ex: André Onana" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail">Adresse email</label>
-                    <input type="email" id="inputEmail" placeholder="Ex: a.onana@cud.cm" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword">Mot de passe choisi</label>
-                    <input type="password" id="inputPassword" placeholder="Choisissez un mot de passe" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputRole">Rôle</label>
-                    <div class="custom-select-wrapper">
-                        <select id="inputRole" required>
-                            <option value="Chef de Chantier">Chef de Chantier</option>
-                            <option value="Superviseur">Superviseur</option>
-                            <option value="Technicien">Technicien</option>
-                            <option value="Prestataire">Prestataire</option>
-                        </select>
-                        <i class="fa-solid fa-chevron-down select-arrow"></i>
-                    </div>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn-cancel" onclick="closeModal()">Annuler</button>
-                    <button type="submit" class="btn-submit">Créer et envoyer par email</button>
+    <div class="modal-overlay" id="modalMembre">
+        <div class="modal">
+            <h3>Nouveau membre d'équipe</h3>
+            <p class="note" style="margin-top:-0.6rem; margin-bottom:1rem;">La personne choisit son mot de passe. Un identifiant sera généré et envoyé par email.</p>
+            <form onsubmit="addMember(event, 'tableEquipeOperations', 'modalMembre')">
+                <div class="form-group"><label>Nom complet</label><input type="text" id="inputNom" placeholder="Ex : André Onana" required></div>
+                <div class="form-group"><label>Adresse email</label><input type="email" id="inputEmail" placeholder="Ex : a.onana@cud.cm" required></div>
+                <div class="form-group"><label>Mot de passe choisi</label><input type="password" placeholder="Choisissez un mot de passe" required></div>
+                <div class="form-group"><label>Rôle</label><select id="inputRole" required><option>Chef de Chantier</option><option>Superviseur</option><option>Technicien</option><option>Prestataire</option></select></div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal('modalMembre')">Annuler</button>
+                    <button type="submit" class="btn-primary">Créer et envoyer par email</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script src="operations.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 </html>

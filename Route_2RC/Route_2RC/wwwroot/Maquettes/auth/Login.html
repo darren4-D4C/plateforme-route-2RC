@@ -6,46 +6,46 @@
     <title>Connexion - AnRen</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="login-page-container bg-network">
+<body class="login-page-container">
 
     <div class="login-top-bar">
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <img src="../assets/cud-logo.png" alt="Logo CUD" style="height: 32px;" onerror="this.style.display='none'">
-            <div style="font-size: 0.8rem; color: var(--text-muted);"><b>Communauté Urbaine de Douala</b><br>Régie des Routes et de la Construction</div>
+        <div class="login-top-brand">
+            <img src="../assets/cud-logo.png" alt="Logo CUD" onerror="this.style.display='none'">
+            <div class="login-top-text"><b>Communauté Urbaine de Douala</b><br>Régie des Routes et de la Construction</div>
         </div>
     </div>
 
     <div class="login-wrapper">
         <div class="login-card-exact">
-            <a href="pageaccueil.html" style="color:var(--cyan-line); text-decoration:none; font-weight:600; display:inline-block; margin-bottom: 0.8rem;">← Retour à l'accueil</a>
+            <a href="pageaccueil.html" class="back-link">← Retour à l'accueil</a>
 
             <div class="login-logo-title">An<span>Ren</span></div>
-            <h2 style="font-size: 1.15rem; margin: 0.4rem 0; color: var(--text-main);">Connexion</h2>
+            <h2 class="login-title">Connexion</h2>
             <p class="login-subtitle">Saisissez vos identifiants pour accéder à votre espace.</p>
 
-            <form id="loginForm" action="../dashboard/dashboard.html" method="GET" novalidate>
+            <form id="loginForm" action="../dashboard/dashboard.html" method="GET" onsubmit="return validateLogin(event)">
 
                 <div class="form-group-custom">
                     <label class="form-label-custom" for="identifiant">Adresse email ou Matricule</label>
-                    <input type="text" id="identifiant" name="identifiant" class="form-input-custom" placeholder="ex: 2RC2026CUD001" autocomplete="username">
+                    <input type="text" id="identifiant" name="identifiant" class="form-input-custom" placeholder="ex: 2RC2026CUD001" autocomplete="username" required>
                     <div class="error-message-text">Veuillez renseigner ce champ.</div>
                 </div>
 
                 <div class="form-group-custom">
                     <label class="form-label-custom" for="password">Mot de passe</label>
-                    <input type="password" id="password" class="form-input-custom" placeholder="••••••••••••" autocomplete="current-password">
+                    <input type="password" id="password" class="form-input-custom" placeholder="••••••••••••" autocomplete="current-password" required>
                     <div class="error-message-text">Ce champ est requis.</div>
                 </div>
 
                 <button type="submit" class="btn-submit-custom">Se connecter</button>
             </form>
 
-            <p style="margin-top: 1.2rem; font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+            <p class="login-note">
                 Maquette front-end : n'importe quel identifiant et mot de passe non vides suffisent pour l'instant. La vraie vérification sera faite par le backend.
             </p>
         </div>
     </div>
 
-    <script src="login.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 </html>

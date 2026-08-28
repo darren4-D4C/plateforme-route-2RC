@@ -3,95 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historique des Relevés - Régie des routes et construction</title>
+    <title>Historique des Relevés — Régie des Routes et Construction</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dash-page">
-
-    <nav class="dash-navbar">
-        <div class="dash-nav-brand">
-            <img src="../assets/cud-logo.png" alt="Logo" onerror="this.style.display='none'">
-            <span>Régie des routes et construction</span>
-        </div>
-        <div class="dash-nav-links">
-            <div class="nav-user-profile">
-                <div class="user-avatar-badge">CE</div>
-                <div class="user-profile-info">
-                    <span class="user-profile-name">Chef Études & Contrôle</span>
-                    <span class="user-profile-role">Études & Contrôle</span>
-                </div>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="brand"><div class="brand-mark">2RC</div><div class="brand-text"><strong>AnRen</strong><span>Régie des Routes et Construction</span></div></div>
+            <nav class="nav">
+                <p class="nav-label">Pilotage</p>
+                <a class="nav-link" href="../dashboard/dashboard.html">Tableau de bord</a>
+                <a class="nav-link" href="../signalements/Liste.html">Signalements</a>
+                <a class="nav-link" href="../interventions/Liste.html">Interventions</a>
+                <p class="nav-label">Référentiel</p>
+                <a class="nav-link" href="Troncons.html">Tronçons</a>
+                <a class="nav-link" href="Equipes.html">Équipes</a>
+                <a class="nav-link" href="References.html">Références</a>
+                <a class="nav-link" href="Releves.html">Relevés</a>
+                <a class="nav-link active" href="Historique.html">Historique</a>
+            </nav>
+            <div class="sidebar-footer"><div class="user"><div class="user-avatar">CE</div><div class="user-meta"><strong>Chef Études &amp; Contrôle</strong><span>Études &amp; Contrôle</span></div></div><a class="logout" href="../auth/Login.html">Déconnexion</a></div>
+        </aside>
+        <div class="overlay" onclick="closeMenu()"></div>
+        <main class="main">
+            <div class="topbar">
+                <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+                <div class="breadcrumb">Référentiel &rsaquo; Historique</div>
+                <input type="text" class="search" placeholder="Rechercher...">
             </div>
-            <a href="../auth/pageaccueil.html">Accueil</a>
-            <a href="Historique.html" class="active">Historique des Relevés</a>
-            <a href="../auth/pageaccueil.html" class="link-logout">Déconnexion</a>
-        </div>
-    </nav>
+            <div class="page-head"><div><h1>Historique des Relevés</h1><p>Relevés topographiques et pluviométriques saisis par les agents terrain, par tronçon.</p></div></div>
 
-    <main class="dashboard-main">
+            <section class="kpi-row kpi-row-2">
+                <div class="kpi"><span class="kpi-label"><span class="icon icon-topo"></span> Relevés topographiques</span><span class="kpi-num" id="kpiTopo">0</span></div>
+                <div class="kpi"><span class="kpi-label"><span class="icon icon-rain"></span> Données pluviométriques</span><span class="kpi-num" id="kpiPluvio">0</span></div>
+            </section>
 
-        <div class="dashboard-header">
-            <div>
-                <h1>Historique des Relevés</h1>
-                <p>Relevés topographiques et pluviométriques saisis par les agents terrain, par tronçon.</p>
-            </div>
-        </div>
-
-        <div class="dashboard-kpis">
-            <div class="kpi-card">
-                <div class="kpi-icon">📐</div>
-                <h3>Relevés topographiques</h3>
-                <p class="kpi-value cyan" id="kpiTopo">0</p>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-icon">🌧️</div>
-                <h3>Données pluviométriques</h3>
-                <p class="kpi-value gold" id="kpiPluvio">0</p>
-            </div>
-        </div>
-
-        <div class="dashboard-section">
-            <div class="section-header">
-                <h2>Tous les relevés</h2>
-                <span>Triés du plus récent au plus ancien</span>
-            </div>
-
-            <div class="list-toolbar">
-                <div class="search-input-wrapper">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+            <section class="card">
+                <div class="card-head"><h2>Tous les relevés</h2><span class="card-sub">Triés du plus récent au plus ancien</span></div>
+                <div class="toolbar">
                     <input type="text" id="searchInput" placeholder="Rechercher par tronçon..." onkeyup="filterHistorique()">
-                </div>
-                <div class="select-with-icon">
                     <select id="typeFilter" onchange="filterHistorique()">
                         <option value="all">Tous les types</option>
                         <option value="topo">Topographique</option>
                         <option value="pluvio">Pluviométrique</option>
                     </select>
-                    <i class="fa-solid fa-chevron-down"></i>
                 </div>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>TYPE</th>
-                        <th>TRONÇON</th>
-                        <th>VALEUR</th>
-                        <th>DATE</th>
-                        <th>SAISI PAR</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBodyContent">
-                    <!-- Rempli par le backend (ReleveTopographieController / DonneePluviometrieController). Vide par défaut. -->
-                </tbody>
-            </table>
-            <p id="emptyStateMsg" style="text-align:center; color:var(--text-muted); padding: 2rem 0; font-size: 0.9rem;">
-                Aucun relevé pour le moment.
-            </p>
-        </div>
-
-    </main>
-
-    <script src="historique.js"></script>
+                <div class="table-scroll">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Type</th><th>Tronçon</th><th>Valeur</th><th>Date</th><th>Saisi par</th></tr>
+                        </thead>
+                        <tbody id="tableBodyContent">
+                            <!-- Rempli par le backend (ReleveTopographieController / DonneePluviometrieController). Vide par défaut. -->
+                        </tbody>
+                    </table>
+                </div>
+                <p class="note" id="emptyStateMsg">Aucun relevé pour le moment.</p>
+            </section>
+        </main>
+    </div>
+    <script src="../js/menu.js"></script>
 </body>
 </html>
