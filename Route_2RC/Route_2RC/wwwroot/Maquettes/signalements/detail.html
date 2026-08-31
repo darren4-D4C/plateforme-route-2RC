@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détail de l'intervention — Régie des Routes et Construction</title>
+    <title>Détail du signalement — Régie des Routes et Construction</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -13,8 +13,8 @@
             <nav class="nav">
                 <p class="nav-label">Pilotage</p>
                 <a class="nav-link" href="../dashboard/dashboard.html">Tableau de bord</a>
-                <a class="nav-link" href="../signalements/Liste.html">Signalements</a>
-                <a class="nav-link active" href="Liste.html">Interventions</a>
+                <a class="nav-link active" href="Liste.html">Signalements</a>
+                <a class="nav-link" href="../interventions/Liste.html">Interventions</a>
                 <p class="nav-label">Référentiel</p>
                 <a class="nav-link" href="../administration/Troncons.html">Tronçons</a>
                 <a class="nav-link" href="../administration/Equipes.html">Équipes</a>
@@ -27,40 +27,41 @@
         <main class="main">
             <div class="topbar">
                 <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
-                <div class="breadcrumb">Interventions &rsaquo; Détail</div>
+                <div class="breadcrumb">Signalements &rsaquo; Détail</div>
                 <input type="text" class="search" placeholder="Rechercher...">
             </div>
             <div class="page-head">
                 <div>
                     <a class="back-link" href="Liste.html">← Retour à la liste</a>
-                    <h1>Intervention — Axe Deido — Bonabéri</h1>
-                    <p>Planifiée le 14/08/2026 · Statut : En cours</p>
+                    <h1>Signalement — Nid-de-poule</h1>
+                    <p>Reçu le 12/08/2026 · Statut : Nouveau</p>
                 </div>
             </div>
             <section class="card">
                 <div class="detail-grid">
                     <div>
+                        <div class="photo-ph">Photo transmise par le citoyen</div>
+                        <div class="map-ph"><span class="icon icon-pin"></span><span>Localisation</span><span class="coords">4.051800, 9.767800</span></div>
+                    </div>
+                    <div>
                         <div class="info-list">
+                            <div class="info-row"><span class="label">Type de dégradation</span><span class="value">Nid-de-poule</span></div>
                             <div class="info-row"><span class="label">Tronçon</span><span class="value">Axe Deido — Bonabéri</span></div>
-                            <div class="info-row"><span class="label">Équipe assignée</span><span class="value">Équipe Bitumage Nord</span></div>
-                            <div class="info-row"><span class="label">Signalement d'origine</span><span class="value"><a class="action-link" href="../signalements/detail.html">Voir le signalement</a></span></div>
-                            <div class="info-row"><span class="label">Date planifiée</span><span class="value">14/08/2026</span></div>
+                            <div class="info-row"><span class="label">Description</span><span class="value">Grand nid-de-poule au milieu de la voie, dangereux la nuit.</span></div>
+                            <div class="info-row"><span class="label">Date</span><span class="value">12/08/2026</span></div>
+                            <div class="info-row">
+                                <span class="label">Score de priorité (IA)</span>
+                                <span class="value score-gauge"><span class="score-bar"><span class="score-fill" style="width:92%"></span></span><span class="score-num">92 / 100</span></span>
+                            </div>
                         </div>
                         <span class="section-label">Changer le statut</span>
                         <div class="status-actions">
-                            <button type="button" class="btn-status" onclick="setStatus(this)"><span class="icon icon-dot-circle"></span> Planifié</button>
-                            <button type="button" class="btn-status current" onclick="setStatus(this)"><span class="icon icon-clock"></span> En cours</button>
-                            <button type="button" class="btn-status" onclick="setStatus(this)"><span class="icon icon-check-circle"></span> Terminé</button>
+                            <button class="btn-status current"><span class="icon icon-dot-circle"></span> Nouveau</button>
+                            <button class="btn-status"><span class="icon icon-clock"></span> En cours</button>
+                            <button class="btn-status"><span class="icon icon-check-circle"></span> Traité</button>
+                            <button class="btn-status"><span class="icon icon-x-circle"></span> Rejeté</button>
                         </div>
-                    </div>
-                    <div>
-                        <span class="section-label" style="margin-top:0;">Matériaux et engins mobilisés</span>
-                        <div class="resource-row"><span class="r-name">Bitume</span><span class="r-detail">12 tonnes</span></div>
-                        <div class="resource-row"><span class="r-name">Compacteur CAT CB10</span><span class="r-detail">6 heures</span></div>
-                        <div class="cost-box"><span class="label">Coût total estimé</span><span class="value">228 000 FCFA</span></div>
-                        <span class="section-label">Historique</span>
-                        <div class="info-row"><span class="value">Intervention créée — Planifié</span><span class="label">14/08/2026</span></div>
-                        <div class="info-row"><span class="value">Démarrage du chantier — En cours</span><span class="label">14/08/2026</span></div>
+                        <div style="margin-top:1.5rem;"><a class="btn-primary" href="../interventions/detail.html">Créer une intervention →</a></div>
                     </div>
                 </div>
             </section>
